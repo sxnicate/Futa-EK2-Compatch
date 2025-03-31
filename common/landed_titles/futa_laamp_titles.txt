@@ -1,0 +1,61 @@
+﻿@never_primary_score = -1000
+
+d_laamp_isolde = {
+	color = { 100 100 100 }
+	capital = c_firebrand
+
+	definite_form = yes
+	landless = yes
+	require_landless = yes
+	ruler_uses_title_name = no
+	no_automatic_claims = yes
+	destroy_if_invalid_heir = yes
+
+	ai_primary_priority = { add = @never_primary_score }
+
+}
+
+d_laamp_warlord = {
+	color = { 150 150 150 }
+	capital = c_mingo
+
+	definite_form = yes
+	landless = yes
+	require_landless = yes
+	ruler_uses_title_name = no
+	no_automatic_claims = yes
+	destroy_if_invalid_heir = yes
+
+	ai_primary_priority = { add = @never_primary_score }
+
+}
+
+d_laamp_martiz = {
+	color = { 100 100 100 }
+	capital = c_brittlerock
+
+	definite_form = yes
+	landless = yes
+	require_landless = yes
+	ruler_uses_title_name = no
+	no_automatic_claims = yes
+	destroy_if_invalid_heir = yes
+
+	ai_primary_priority = { add = @never_primary_score }
+
+}
+
+d_laamp_hermillia = {
+	color = { 100 100 100 }
+	capital = c_stoneden
+
+	definite_form = yes
+	landless = yes
+	require_landless = yes
+	ruler_uses_title_name = no
+	no_automatic_claims = yes
+	destroy_if_invalid_heir = yes
+
+	ai_primary_priority = { add = @never_primary_score }
+
+}
