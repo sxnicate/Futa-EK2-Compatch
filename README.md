@@ -1,0 +1,2 @@
+- Changed Futa Khutan culture
+- Changed futa religion holy sites
