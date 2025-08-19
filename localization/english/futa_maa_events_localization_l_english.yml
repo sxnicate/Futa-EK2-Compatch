@@ -1,0 +1,125 @@
+﻿l_english:
+ 
+ ##MODIFIERS
+ 
+ ##FUTA MAA
+ 
+ futa_boga_shortbows:0 "Boga Shortbows"
+ futa_boga_shortbows_flavor:0 "The Boga Shortbows have operated near the lands of Britannia since before the first Roman Legion ever arrived. A Futanari people, they always found themselves on the edge of neighbouring civilisations. They fought and lost to Rome like the rest, scattering along with the rest of the natives. \n\nThroughout the years since they have honed their skills as archers, favouring short bows for close engagements. Due to being cursed Futanari, they were never integrated into local cultures and thus maintain a unique identity despite being scattered."
+ 
+ futa_hermillia_matrons:0 "Hermillia’s Matrons"
+ futa_hermillia_matrons_flavor:0 "As Hermillia returns to the world, so do her blessings. Futanari who have lived lives full of fertility may now receive visions of a greater calling. Should they accept, these mature Futanari mothers undertake a ritual, donning symbols of fertility and earning a portion of divine power based on their reproductive history. They seek to protect Hermillia’s most devout."
+ 
+ futa_hermillias_imbued_matrons:0 "Hermillia’s Imbued Matrons"
+ futa_hermillias_imbued_matrons_flavor:0 "Having taken in the essance of the Goddess, these faithful mothers of the Hermillian faith have gained access to supernatural strength for a time."
+ 
+ futa_vagrant_drengs:0 "Vagrant Drenġs"
+ futa_vagrant_drengs_flavor:0 "Like all peoples of the isles, the Futanari population of Britannia has been shaped by the many invasions across history. Outsiders who fought alongside Futanari would allow their allies to pillage and rape the “old enemies” in preference to breeding with their own. Over the generations, a cast of Futanari emerged with heritage between romans, saxons, celts and norse. Whilst they struggle to find acceptance within their homelands, they are all accepting of one another. \n\nDue to the origin of their bloodlines, these Futanari are especially prone to their urges, but they prefer to unleash their passions on each other."
+ 
+ futa_vagrant_drengs_preggo:0 "$futa_vagrant_drengs$ (Pregnant)"
+ futa_vagrant_drengs_preggo_flavor:0 "All actions have consequences. Their merry making has resulted in a few new Futanari growing within the regiment. Less useful - and morally grey to send - in a battle until they have been given time to give birht and recover."
+ 
+ futa_burial_wardens:0 "Burial Mound Wardens"
+ futa_burial_wardens_flavor:0 "A fading order native to Ireland who oversee the maintainence and protection of its many burial sites. The constant infighting of Irish upstarts has rendered their numbers few. They only approach those they deem show proper respect."
+ 
+ ##SPECIAL TROOPS
+ futa_imbued_matrons: "Imbued Matrons"
+ futa_defected_matrons: "Defected Matrons"
+ 
+ ##WEAPONS
+ WP_claymore_name:0 "Irish Claymore"
+ WP_claymore_desc:0 "This large blade requires ample strength to wield effectively. It's sheer size grants the wielder an advantage against convential swords and axes. Anbitious mercs and savage Bog Blasters have taken to using these weapons."
+ 
+ WP_bb_claymore_name:0 "Boggiest Claymore"
+ WP_bb_claymore_desc:0 "This Claymore has been passed down by the most infamous group of Bog Blasters. It reeks of mud, sweat and... Something #EMP else#!."
+ 
+ WP_bb_carldenite_blade_name:0 "Carldenite Bog Blade"
+ WP_bb_carldenite_blade_desc:0 "A weapon bestowed by the Catholic Church to the Bog Blasters of Ireland most open to hearing the true word of God so that they might better educate their bretheren."
+
+ ##NOTIFICATION EVENTS:
+ futa_nun_combat_event.title:0 "Battle Nuns Rally Army!"
+ futa_nun_combat_event.desc:0 "Your faithful Futanari Nuns pray for God's protection, inspiring your troops!"
+
+ futa_boga_shortbows_made_bodkin_arrows.title: "Bodkin Arrows"
+ futa_boga_shortbows_made_bodkin_arrows.desc: "Your [GetMaA('futa_boga_shortbows').GetName] have made some new ammunition to use during a battle!"
+ futa_boga_shortbows_made_bodkin_arrows_tt: "[GetMaA('futa_boga_shortbows').GetName] have procured some heavy bodkin arrows"
+
+ futa_boga_shortbows_battle_event.title: "Enemy Pelted with Bodkin Arrows"
+ futa_boga_shortbows_battle_event_damage_maa.desc: "Our archers have seriously damaged an enemy regiment!"
+ futa_boga_shortbows_battle_event_damage_knight.desc: "Our archers have seriously damaged an enemy fighter!"
+ futa_boga_shortbows_battle_event_enemy.title: "Pelted with Bodkin Arrows"
+ futa_boga_shortbows_battle_event_damage_maa_enemy.desc: "Enemy archers have seriously damaged one of our regiments!"
+ futa_boga_shortbows_battle_event_damage_knight_enemy.desc: "Enemy archers have seriously damaged one of our fighters!"
+
+ futa_matrons_defect_battle_event.title: "The Matrons Defect!"
+ futa_matrons_defect_battle_event.desc: "Troubling news from the front lines. My squad of Hermillia’s Matrons have #EMP abandoned#! my cause, joining with the enemy due to a supposed “Destined one” walking amongst them."
+ 
+ ##EVENTS
+ 
+ futa_maa_events.0001.title:0 "Heiress of the Goddess" #Located in Futa MAA Events
+ futa_maa_events.0001.desc:0 "“Our apologies if we come to you at an inconvenient time, but my fellow worshipers and I have come to request if we could sample some of your divine seed?” A member of Hermillia’s matrons approaches me, her compatriots in toe. It is true my birth was a sign of Hermillia’s will manifested. These mature Futanari revere the goddess thoroughly. It would displease Hermillia if I were to neglect them."
+ futa_maa_events.0001.a:0 ""Very well.""
+ 
+ #
+ 
+ futa_maa_events.0002.title:0 "Heiress of the Goddess" #Part 2
+ futa_maa_events.0002.desc:0 "”My my, look at how cute your holy rod is. I think it’s time it received some appropriate worship.” It has been #EMP hours#!.. Hours of explicit, ball draining suction from these fine women of faith. My sack has shrunken to the smallest I can ever recall. I am drenched in sweat, my strength flowing out of me alongside my special seed. \n\n”Thank you ever so much special one. Your seed was just the catalyst we needed to properly serve our goddess. Before to long you will be #EMP very#! glad you shared this gift with us.”"
+ futa_maa_events.0002.a:0 "“I already am.”"
+ 
+ #
+ 
+ futa_maa_events.0003.title:0 "A Divine Confrontation"
+ futa_maa_events.0003.desc:0 "The battlefield harbours such an insulting sight. My foe rides with Futanari claiming to be “Hermillia’s Matrons” when their Goddess lives and breathes before them! To think they would #EMP dare#! betray their own kind like that. My mind is boiling with anger, but I must think. It is a duty of a Goddess to keep her followers in line and lead them towards the correct path. They have merely been misled by this world full of Futanari haters…"
+ futa_maa_events.0003.a:0 "“Join me and find redemption!”"
+ futa_maa_events.0003.b:0 "“#EMP Feel your Goddess’ #BOLD WRATH!#!#!”"
+ 
+ #
+ 
+ futa_maa_events.0011.title:0 "Beacon of Worship"
+ futa_maa_events.0011.desc:0 "Marching an army requires effective communication at all times, lest your ranks fall into disarray in hostile territory. I knew what was required of me and prepared accordingly, but I must admit I am struggling under the pressure of expectation. Well that… And another pressure building up between my legs. \n\nCertain… #EMP Mature#! members of my troop have been smothering me with unrequested attention… And bosoms. Normally I would discipline such behaviour, but considering their rank I am in a tough spot. #EMP And their bodies are really cuddly…#! \n\n”Please commander, let us take care of you for a moment. Our forces rely on you having a clear mind and sharp focus. We’ve all been caught by nature, nothing to be ashamed of. And we have heard such #EMP great things#! about how you treat your women.”"
+ futa_maa_events.0011.a:0 "“No, #BOLD #EMP March#!#!”"
+ futa_maa_events.0011.b:0 "“If you insist…”"
+ 
+ #
+ 
+ futa_maa_events.0012.title:0 "Beacon of Worship" #Part 2
+ futa_maa_events.0012.desc:0 "#EMP *Slurp* *Suck* *Lick* #! \n\n#EMP OooOOhhhh it feels sooooo GOOD#! The experienced matrons have been lining up to pleasure me using nothing but their experienced mouths and milky breasts. My legs are trembling as I try to stand firm, but orgasm after orgasm has left me rather sensitive. \n\n”Oh heavens, what a fine piece of stud meat our commander is. Hermillia must have blessed her cock herself!” \n\n”Stop hogging her to yourself, I’m going to burst before I even got a taste!” \n\n#EMP Nughhh!#! I can feel another load on its way out…"
+ futa_maa_events.0012.a:0 "“Gah! #EMP Cumming!#!""
+ 
+ #
+ 
+ futa_maa_events.0021.title:0 "The Price Of Payment"
+ futa_maa_events.0021.desc:0 "“Now now, no need for the surprised look on your face. We ladies can be quite fair, all things considered. ‘EMP You#! Are the one unable to uphold your own terms, not the mark of a great leader is it?” \n\nTerrible times bring dark tidings. My rulership has devolved into a state of financial decay. Why does nobody understand that gold does not grow on trees! The band of Futanari Mercenaries I had hired took note of my financial decline and are afraid I shall toss them out or renege on payments. \n\n”I’ll keep this short and sweet. We are pretty backed up and eager to let loose some steam. We usually refrain from doing so, but your current state could be a boon for both of us. Hand over someone precious to you to act as our #EMP stress relief#! and in return, we will overlook missing payments of coin… For now.” \n\nThe Futanari all leer at me, a fair few of them having growing bulges between their legs. #EMP What am I to do?#!"
+ futa_maa_events.0021.a:0 ""You can have my wife…""
+ futa_maa_events.0021.b:0 "“My Daughter and heir…”"
+ futa_maa_events.0021.c:0 "“You will have #EMP nothing!#!”"
+ 
+ #
+ 
+ futa_maa_events.0022.title:0 "The Price Of Payment" #Given Tribute
+ futa_maa_events.0022.desc:0 "The Futanari use [tribute.GetFirstName] for hours. You try to forget about what is happening, but #EMP nothing#! Would stop the sounds of her defilement from reaching your ears. \n\nThese brutish mercenaries call her every degenerate phrase under the sun. Groping at her body, tainting her flesh with their scent. You can hear [tribute.GetFirstName] wailing through the night, likely from the abuse… #EMP Surely.#! \n\nWill she ever forgive you for what you have done to her? Will you ever forgive yourself?"
+ futa_maa_events.0022.a:0 "They are still using her…"
+ 
+ #
+ 
+ futa_maa_events.0031.title:0 "Drenġs Celebrations"
+ futa_maa_events.0031.desc:0 "With my recent victory my people enter a period of celebration and recovery. Whilst there is always a need for soldiers, I grant those who had fought hardest on the front lines a brief reprieve. Rumor quickly spreads of how a certain group from the army decided to celebrate. \n\nThose Futanari Drenġs went into a lustful orgie. Each one of them having a go taking and receiving numerous of her comrades in arms at a time! Apparently this is just the way their people do things. \n\nSome on lookers were worried if this would devolve into a series of rapes against allied forces, but from what I hear the Drenġs have kept it to themselves and are #EMP loving#! One another’s company!"
+ futa_maa_events.0031.a:0 "May many more victories follow!"
+ 
+ #
+ 
+ futa_maa_events.0032.title:0 "Drenġs Miracle"
+ futa_maa_events.0032.desc:0 "Some members of my army have pulled me aside for a “serious conversation”. They look a little… Anxious? Moreover, I cannot help but notice some of them look like they have gained some weight all of a sudden. \n\n”So uh, hi boss. We might have partied a bit hard and well, the storks have come to roost!” \n\n”She means to say, we got knocked up.” \n\n”Big time.” One of the Futanari emphasises as she clutches her belly. \n\n”I know this isn’t ideal but we can still fight! #weak probably.#! If you keep us employed, we will be sure to try extra hard for you after we are, well, #EMP not#! Pregnant anymore.”"
+ futa_maa_events.0032.a:0 "Of all of the…"
+ 
+ #
+ 
+ futa_maa_events.0033.title:0 "Drenġs Family"
+ futa_maa_events.0033.desc:0 "A messenger has informed me that those Vagrant Drenġs who had gotten pregnant are preparing to rejoin my forces in full force. Their offspring are to be cared for by a mixture of volunteers and those of them that would prefer to continue life as Mothers. Maybe they will grow up to be an asset to my realm in the future?"
+ futa_maa_events.0033.a:0 "Time will tell."
+ 
+ #
+ 
+ futa_maa_events.0034.title:0 "Drenġs of Age"
+ futa_maa_events.0034.desc:0 "An entourage of armed futanari of various dispositions had requested a meeting with me. They all look young and healthy, which is worrying that such a group seems to have business with me. \n\n”We come in peace and wish good tidings upon you. This might sound strange, but we are hoping you will accept our request to enter your employment.” \n\nShe is right, this is a surprise. Why would these women wish to fight in battles for me? \n\n”Our Mothers had fought for your side in years past. We heard tales of the victories won back in those days. Whilst most of our sisters have decided a more peaceful life is for them, we cannot say the same. Glory and conquest is in our blood. Should you add us to your payroll you shall not find us lacking.”"
+ futa_maa_events.0034.a:0 "“Extra troops? Welcome aboard!”"
