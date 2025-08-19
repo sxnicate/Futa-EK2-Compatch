@@ -1,0 +1,72 @@
+## Fate Chasers
+d_laamp_isolde = {
+	3360.1.1 = {
+		liege = 0
+		holder = futa_isolde
+		government = landless_adventurer_government
+		succession_laws = { landless_adventurer_succession_law }
+		effect = {
+			create_landless_adventurer_title_history_effect = yes
+			set_variable = { name = adventurer_creation_reason value = flag:voluntary }
+			destroy_landless_title_no_dlc_effect = { DATE = 3360.1.1 }
+		}
+	}
+	3361.1.1 = {
+		holder = 0
+	}
+}
+
+## Disparate Tribe
+d_laamp_warlord = {
+	3360.1.1 = {
+		liege = 0
+		holder = futa_warlord
+		government = landless_adventurer_government
+		succession_laws = { landless_adventurer_succession_law }
+		effect = {
+			create_landless_adventurer_title_history_effect = yes
+			set_variable = { name = adventurer_creation_reason value = flag:voluntary }
+			destroy_landless_title_no_dlc_effect = { DATE = 3360.1.1 }
+		}
+	}
+	3361.1.1 = {
+		holder = 0
+	}
+}
+
+
+#Devil Subdueres
+d_laamp_martiz = {
+	3360.1.1 = {
+		liege = 0
+		holder = futa_martiz
+		government = landless_adventurer_government
+		succession_laws = { landless_adventurer_succession_law }
+		effect = {
+			create_landless_adventurer_title_history_effect = yes
+			set_variable = { name = adventurer_creation_reason value = flag:voluntary }
+			destroy_landless_title_no_dlc_effect = { DATE = 3360.1.1 }
+		}
+	}
+	3361.1.1 = {
+		holder = 0
+	}
+}
+
+## Futadom
+d_laamp_hermillia = {
+	3360.1.1 = {
+		liege = 0
+		holder = futa_hermillia
+		government = landless_adventurer_government
+		succession_laws = { landless_adventurer_succession_law }
+		effect = {
+			create_landless_adventurer_title_history_effect = yes
+			set_variable = { name = adventurer_creation_reason value = flag:voluntary }
+			destroy_landless_title_no_dlc_effect = { DATE = 3360.1.1 }
+		}
+	}
+	3361.1.1 = {
+		holder = 0
+	}
+}
