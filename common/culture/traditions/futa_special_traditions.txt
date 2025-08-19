@@ -1,0 +1,106 @@
+﻿
+# Finisher:
+# The Main Tradition of the Khatun Culture
+futa_legacy_of_the_struggle_culture = {
+	category = regional
+
+	layers = {
+		#0 = martial3
+		#1 = western3
+		4 = fsrg.dds
+	}
+
+	is_shown = {
+		any_parent_culture_or_above = {
+			has_cultural_tradition = futa_legacy_of_the_struggle_culture
+		}
+	}
+
+	can_pick = {
+		any_parent_culture_or_above = {
+			has_cultural_tradition = futa_legacy_of_the_struggle_culture
+		}
+	}
+
+	parameters = {
+		futa_unlock_maa_futa_steppe_huntress = yes
+		futa_enables_futa_tributary_vassal_contract = yes
+		culture_can_raid_over_land_even_if_feudal_no_restrictions = yes
+		futa_enable_grand_raid_cb = yes
+		futa_enable_captive_raid_cb = yes
+		futa_sieges_replenish_maa = yes
+		futa_sieges_provide_slave_soldiers = yes
+		futa_battles_provide_slave_soldiers = yes
+		gain_gold_from_battles = yes
+		tribal_holding_stationed_bonus = yes
+		peasant_and_populist_factions_less_common = yes
+		expensive_convert_to_local_culture = yes
+		less_likely_to_culture_convert = yes
+		less_likely_to_promote_culture = yes
+		female_only_inheritance = yes
+		female_preference_inheritance = yes
+		can_enact_high_partition_succession_law = yes
+	}
+
+	culture_modifier = {
+		cultural_acceptance_gain_mult = -0.50
+	}
+
+	character_modifier = {
+		prowess = 4
+		negate_prowess_penalty_add = 4
+		diplomacy = -2
+		martial = 2
+		negate_health_penalty_add = 0.5
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = 4000
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOT = {
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+					}	
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = culture_not_bellicose
+				}	
+			}
+			if = {	# Make it more expensive if the char is not futa
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						scope:character = {
+							NOR = {
+								has_trait = futa_genetic
+								has_trait = backed_up
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_you_are_not_futa_desc
+				}
+			}		
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+	}
+}

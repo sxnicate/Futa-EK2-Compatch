@@ -1,0 +1,20 @@
+﻿@always_primary_score = 100000
+@never_primary_score = -1000
+
+e_futa_azure_empire = {
+	color = { 38 169 255 }
+	can_be_named_after_dynasty = no
+
+	definite_form = yes
+
+	can_create = {
+		rule_title_creation_imperial_power_projection_title_creation_trigger = yes
+	}
+
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
+
+	capital = c_redmane
+
+}

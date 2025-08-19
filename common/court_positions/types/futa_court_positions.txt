@@ -1,0 +1,900 @@
+﻿# Futa Fucksleeve position
+futa_fucksleeve_court_position = {
+	max_available_positions = 3
+	category = futa_court_position_category_special
+
+	opinion = { value = ceremonial_court_position_opinion }
+
+	# How high the aptitude has to be to reach the 5 different modifier levels
+	aptitude_level_breakpoints = { 20 40 60 80 }
+
+	# How good is this character in this position? root scope is the holder of the court position
+	# Finisher: Added a few extra aptitude bonuses that felt fitting.
+	aptitude = {
+		value = 10
+		if = {
+			limit = { health >= 5 }
+			add = {
+				value = health
+				multiply = 5
+				add = 10
+				desc = court_position_skill_health_good
+			}
+		}
+		else_if = {
+			limit = { health < 3 }
+			add = {
+				value = health
+				multiply = 10
+				add = -30
+				desc = court_position_skill_health_low
+			}
+		}
+		else = {
+			add = {
+				value = health
+				multiply = 2
+				desc = court_position_skill_health
+			}
+		}
+		if = {
+			limit = { has_trait = slave }
+			add = {
+				value = 20
+				desc = futa_fucksleeve_slave
+			}
+		}
+		if = {
+			limit = { has_trait = fecund }
+			add = {
+				value = 80
+				desc = futa_fucksleeve_fecund
+			}
+		}
+		if = {
+			limit = { has_trait = lustful }
+			add = {
+				value = 20
+				desc = futa_fucksleeve_lustful
+			}
+		}
+		if = {
+			limit = { has_trait = milf }
+			add = {
+				value = 30
+				desc = futa_fucksleeve_milf
+			}
+		}
+		if = {
+			limit = { has_trait = mommy_milkers }
+			add = {
+				value = 20
+				desc = futa_fucksleeve_mommy_milkers
+			}
+		}
+		if = {
+			limit = { has_trait = voluptuous_ass }
+			add = {
+				value = 15
+				desc = futa_fucksleeve_voluptuous_ass
+			}
+		}
+		if = {
+			limit = { has_trait = bunnies }
+			add = {
+				value = 25
+				desc = futa_fucksleeve_bunnies
+			}
+		}		
+		if = {
+			limit = { has_trait = beauty_good_1 }
+			add = {
+				value = 20
+				desc = futa_beauty_good_1
+			}
+		}
+		if = {
+			limit = { has_trait = beauty_good_2 }
+			add = {
+				value = 40
+				desc = futa_beauty_good_2
+			}
+		}
+		if = {
+			limit = { has_trait = beauty_good_3 }
+			add = {
+				value = 60
+				desc = futa_beauty_good_3
+			}
+		}
+		add = court_position_aptitude_low_penalty_value
+	}
+
+	is_shown = {
+		has_trait = futa_genetic
+		
+		# Finisher: During my testing of landless stuff, it was very hard to handle backed_up. Added a way to make this position available to fitting characters to help.
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+			OR = {
+				has_realm_law = camp_purpose_brigands
+				has_trait = gallowsbait
+			}
+		}
+		trigger_else = {
+			OR = {
+				dynasty ?= {
+					has_dynasty_modifier = fenclave_acceptance
+				}		
+				has_character_flag = enclave_flag
+				has_character_flag = has_contact_with_enclave_flag
+			}			
+		}      
+    }
+
+	# Is this an available position for this court? (root is court owner)
+	valid_position = {
+	    has_trait = futa_genetic
+	}
+
+	is_shown_character = {
+		scope:employee = {
+			is_female = yes
+		}
+	}
+	
+	valid_character = {
+		scope:employee = {
+			trigger_if = {
+				limit = { NOT = { has_court_position = futa_fucksleeve_court_position } }
+				court_position_does_not_already_have_a_job_trigger = yes
+			}
+			is_courtier_of = scope:liege
+			NOT = { is_councillor_of = scope:liege }
+		}
+	}
+
+	revoke_cost = {
+		prestige =  {
+			value = major_court_position_prestige_revoke_cost
+			multiply = 0
+		}
+	}
+
+	salary = {
+		round = no
+		gold = {
+			value = minor_court_position_salary
+			multiply = {
+				value = 0.0
+			}
+		}
+	}
+
+	is_powerful_agent = yes
+
+	# These modifiers are employed based on what level the aptitude reaches (levels are defined as breakpoints) 
+	# Finisher: Buffed the modifiers to make them a bit more appealing.
+	scaling_employer_modifiers = {
+		terrible = {
+		    court_grandeur_baseline_add = 1
+			stress_loss_mult = 0.02
+			backed_up_xp_loss_mult = 0.02
+		}
+		poor = {
+			court_grandeur_baseline_add = 1
+			stress_loss_mult = 0.04
+			backed_up_xp_loss_mult = 0.04
+		}
+		average = {
+			court_grandeur_baseline_add = 2
+			stress_loss_mult = 0.06
+			backed_up_xp_loss_mult = 0.06
+		}
+		good = {
+			court_grandeur_baseline_add = 2
+			stress_loss_mult = 0.08
+			backed_up_xp_loss_mult = 0.08
+		}
+		excellent = {
+			court_grandeur_baseline_add = 3
+			stress_loss_mult = 0.10
+			backed_up_xp_loss_mult = 0.10
+		}
+	}
+
+	custom_employer_modifier_description = futa_fucksleeve_employer_custom_effect_description
+
+	modifier = {
+		monthly_prestige = minor_court_position_prestige_salary
+		monthly_learning_lifestyle_xp_gain_mult = -0.1
+	}
+
+	#custom_employee_modifier_description = futa_fucksleeve_employee_custom_effect_description
+
+	on_court_position_received = {
+		futa_fucksleeve_title_accepted_effect = yes
+		hidden_effect = {		# This wasn't working because it was scoped wrong. An Enslave effect exist on carnalitas so switched to that one instead
+			scope:employee = {
+				carn_enslave_effect = {
+					OWNER = scope:liege
+					SLAVE = scope:employee
+					DRAMA = no	# This can be set to no for no opinion penalties
+				}
+			}	
+		}			
+	}
+	on_court_position_revoked = { 
+		futa_fucksleeve_title_revoked_effect = yes
+		hidden_effect = {	# Think it makes sense that they are no longer a slave if they are dismissed
+			scope:employee = {
+				carn_free_slave_effect = yes
+			}
+		}
+	}
+	on_court_position_invalidated = {
+		futa_fucksleeve_title_invalidated_effect = yes
+		hidden_effect = {	# Think it makes sense that they are no longer a slave if they are dismissed
+			scope:employee = {
+				carn_free_slave_effect = yes	
+			}
+		}
+	}
+
+	# Scripted value to determine whether an AI will hire/fire a position or not. Hires over 0, fires under -50. Look in _court_positions.info for more extensive documentation!
+	candidate_score = {
+		value = 100
+		add = scope:base_value
+		add = court_position_candidate_score_base_value
+		add = court_position_debt_considerations_value
+	}
+}
+
+enclave_rep_court_position = {
+	max_available_positions = 1
+	category = futa_court_position_category_special
+	minimum_rank = county
+	skill = diplomacy
+
+	opinion = {
+		value = regular_court_position_opinion
+	}
+	
+	# How high the aptitude has to be to reach the 5 different modifier levels
+	aptitude_level_breakpoints = { 20 40 60 80 }
+	
+	# How good is this character in this position? root scope is the holder of the court position
+	aptitude = {
+		value = 1
+		add = {
+			value = diplomacy
+			multiply = 2.5
+			max = 50
+			desc = court_position_skill_diplomacy
+		}
+		if = {
+			limit = {
+				has_trait = just
+			}
+			add = {
+				value = 15
+				desc = court_position_just_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = diplomat
+			}
+			add = {
+				value = 30
+				desc = court_position_diplomat_trait
+			}
+		}
+		add = court_position_aptitude_family_business_value
+		add = court_position_aptitude_low_penalty_value
+	}
+	
+	# Is this an available position for this court? (root is court owner)
+	is_shown = {
+		has_character_flag = enclave_flag
+	}
+	
+	is_shown_character = {
+		scope:employee = {
+			is_imprisoned = no
+			has_trait = futa_genetic
+		}
+	}
+	# Is this a valid position for this character? Also checks the scripted rule "is_eligible_for_court_positions" in code. (root is potential position holder)
+	valid_character = {
+	}
+	
+	revoke_cost = {
+		prestige =  {
+			value = major_court_position_prestige_revoke_cost
+
+			# Set to 0 with Dynasty Perk Inner Circle
+			if = {
+				limit = {
+					exists = dynasty
+					dynasty = { has_dynasty_perk = fp2_coterie_legacy_1 }
+
+					employs_court_position = cultural_emissary_court_position
+					any_court_position_holder = {
+				        type = cultural_emissary_court_position
+						exists = dynasty
+						house = prev.house
+					}
+				}
+				multiply = 0
+			}
+			if = {
+				limit = {
+					exists = this
+					is_ai = yes
+				}
+				multiply = 0
+			}
+		}
+	}
+	
+	salary = {
+		round = no
+		gold = {
+			value = minor_court_position_salary
+			# Set to 0 with Dynasty Perk Inner Circle
+			if = {
+				limit = {
+					scope:liege = {
+						exists = dynasty
+						dynasty = { has_dynasty_perk = fp2_coterie_legacy_1 }
+
+						employs_court_position = cultural_emissary_court_position
+						any_court_position_holder = {
+					        type = cultural_emissary_court_position
+							exists = dynasty
+							house = prev.house
+						}
+					}
+				}
+				multiply = {
+					value = 0.0
+					desc = inner_circle_salary_mod
+					format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+				}
+			}
+			if = {
+				limit = {
+					scope:liege = {
+						employs_court_position = cultural_emissary_court_position
+						any_court_position_holder = {
+					        type = cultural_emissary_court_position
+					        scope:liege = {
+								has_hook_of_type = {
+									type = obligation_hook
+									target = prev
+								}
+							}
+						}
+					}
+				}
+				multiply = {
+					value = 0.5
+					desc = obligation_hook_salary
+				}
+			}
+		}
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			different_culture_opinion = 2
+			monthly_prestige = 0.1
+		}
+		poor = {
+			different_culture_opinion = 5
+			monthly_prestige = 0.2
+		}
+		average = {
+			different_culture_opinion = 10
+			monthly_prestige = 0.4
+		}
+		good = {
+			different_culture_opinion = 15
+			monthly_prestige = 0.7
+		}
+		excellent = {
+			different_culture_opinion = 20
+			monthly_prestige = 1
+		}
+	}
+	
+	modifier = {
+		monthly_prestige = minor_court_position_prestige_salary
+	}
+	
+	on_court_position_received = {
+		basic_gained_court_position_effect = yes
+	}
+	on_court_position_revoked = {
+		basic_revoked_court_position_effect = yes
+	}
+	on_court_position_invalidated = {
+		basic_invalidated_court_position_effect = yes
+	}
+	candidate_score = {
+		value = 100
+		add = scope:base_value
+		add = court_position_candidate_score_base_value
+		add = court_position_candidate_aptitude_value
+		add = court_position_debt_considerations_value
+	}
+}
+
+prized_femboi_court_position = {
+	max_available_positions = 1
+	category = futa_court_position_category_special
+	minimum_rank = county
+	skill = diplomacy
+
+	opinion = {
+		value = regular_court_position_opinion
+	}
+	
+	# How high the aptitude has to be to reach the 5 different modifier levels
+	aptitude_level_breakpoints = { 20 40 60 80 }
+	
+	# How good is this character in this position? root scope is the holder of the court position
+	aptitude = {
+		value = 1
+		add = {
+			value = health
+			multiply = 2.5
+			max = 60
+			desc = court_position_health
+		}
+		if = {
+			limit = {
+				has_trait = beauty_good_1
+			}
+			add = {
+				value = 15
+				desc = court_position_beauty_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = beauty_good_2
+			}
+			add = {
+				value = 25
+				desc = court_position_beauty_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = beauty_good_3
+			}
+			add = {
+				value = 35
+				desc = court_position_beauty_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = fecund
+			}
+			add = {
+				value = 25
+				desc = court_position_fecund_trait
+			}
+		}
+		add = court_position_aptitude_family_business_value
+		add = court_position_aptitude_low_penalty_value
+	}
+	
+	# Is this an available position for this court? (root is court owner)
+	is_shown = {
+		has_trait = futa_genetic
+		exists = dynasty
+		dynasty = { has_dynasty_modifier = femboi_acceptance }
+	}
+	
+	is_shown_character = {
+		scope:employee = {
+			is_imprisoned = no
+			has_trait = femboi
+		}
+	}
+	# Is this a valid position for this character? Also checks the scripted rule "is_eligible_for_court_positions" in code. (root is potential position holder)
+	valid_character = {
+	}
+	
+	revoke_cost = {
+		prestige =  {
+			value = major_court_position_prestige_revoke_cost
+
+			# Set to 0 with Dynasty Perk Inner Circle
+			if = {
+				limit = {
+					exists = dynasty
+					dynasty = { has_dynasty_perk = fp2_coterie_legacy_1 }
+
+					employs_court_position = cultural_emissary_court_position
+					any_court_position_holder = {
+				        type = cultural_emissary_court_position
+						exists = dynasty
+						house = prev.house
+					}
+				}
+				multiply = 0
+			}
+			if = {
+				limit = {
+					exists = this
+					is_ai = yes
+				}
+				multiply = 0
+			}
+		}
+	}
+	
+	salary = {
+		round = no
+		gold = {
+			value = minor_court_position_salary
+			# Set to 0 with Dynasty Perk Inner Circle
+			if = {
+				limit = {
+					scope:liege = {
+						exists = dynasty
+						dynasty = { has_dynasty_perk = fp2_coterie_legacy_1 }
+
+						employs_court_position = cultural_emissary_court_position
+						any_court_position_holder = {
+					        type = cultural_emissary_court_position
+							exists = dynasty
+							house = prev.house
+						}
+					}
+				}
+				multiply = {
+					value = 0.0
+					desc = inner_circle_salary_mod
+					format = "BASE_VALUE_FORMAT_DECIMALS_MINUS_POSITIVE"
+				}
+			}
+			if = {
+				limit = {
+					scope:liege = {
+						employs_court_position = cultural_emissary_court_position
+						any_court_position_holder = {
+					        type = cultural_emissary_court_position
+					        scope:liege = {
+								has_hook_of_type = {
+									type = obligation_hook
+									target = prev
+								}
+							}
+						}
+					}
+				}
+				multiply = {
+					value = 0.5
+					desc = obligation_hook_salary
+				}
+			}
+		}
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			monthly_court_grandeur_change_mult = 0.01
+		}
+		poor = {
+			monthly_court_grandeur_change_mult = 0.02
+			monthly_prestige = 0.05
+		}
+		average = {
+			monthly_court_grandeur_change_mult = 0.03
+			monthly_prestige = 0.1
+		}
+		good = {
+			monthly_court_grandeur_change_mult = 0.04
+			monthly_prestige = 0.15
+		}
+		excellent = {
+			monthly_court_grandeur_change_mult = 0.05
+			monthly_prestige = 0.2
+		}
+	}
+	
+	modifier = {
+		monthly_prestige = minor_court_position_prestige_salary
+	}
+	
+	on_court_position_received = {
+		basic_gained_court_position_effect = yes
+	}
+	on_court_position_revoked = {
+		basic_revoked_court_position_effect = yes
+	}
+	on_court_position_invalidated = {
+		basic_invalidated_court_position_effect = yes
+	}
+	candidate_score = {
+		value = 100
+		add = scope:base_value
+		add = court_position_candidate_score_base_value
+		add = court_position_candidate_aptitude_value
+		add = court_position_debt_considerations_value
+	}
+}
+
+futa_nun_court_position = {
+	max_available_positions = 24
+	category = futa_court_position_category_special
+	skill = learning
+
+	opinion = {
+		value = regular_court_position_opinion
+	}
+	
+	# How high the aptitude has to be to reach the 5 different modifier levels
+	aptitude_level_breakpoints = { 20 40 60 80 }
+	
+	# How good is this character in this position? root scope is the holder of the court position
+	aptitude = {
+		value = 1
+		add = {
+			value = learning
+			multiply = 2.5
+			max = 50
+			desc = court_position_skill_learning
+		}
+		if = {
+			limit = {
+				has_trait = calm
+			}
+			add = {
+				value = 20
+				desc = court_position_calm_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = patient
+			}
+			add = {
+				value = 20
+				desc = court_position_patient_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = temperate
+			}
+			add = {
+				value = 30
+				desc = court_position_temperate_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = zealous
+			}
+			add = {
+				value = 30
+				desc = court_position_zealous_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = compassionate
+			}
+			add = {
+				value = 20
+				desc = court_position_compassionate_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = chaste
+			}
+			add = {
+				value = 40
+				desc = court_position_chaste_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = lustful
+			}
+			add = {
+				value = -40
+				desc = court_position_lustful_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = rakish
+			}
+			add = {
+				value = -40
+				desc = court_position_rakish_trait
+			}
+		}
+		if = {
+			limit = {
+				has_trait = futa_restless
+			}
+			add = {
+				value = -50
+				desc = court_position_futa_restless_trait
+			}
+		}
+		if = {
+		    limit = {
+			    has_trait_xp = {
+					trait = backed_up
+					value < 25
+				}
+			}
+			add = {
+				value = 50
+				desc = court_position_backed_up_low
+			}
+		}
+		if = {
+		    limit = {
+			    has_trait_xp = {
+					trait = backed_up
+					value < 75
+				}
+				NOT = {
+				    has_trait_xp = {
+					    trait = backed_up
+					    value < 25
+				    }
+				}
+			}
+			add = {
+				value = 25
+				desc = court_position_backed_up_mid
+			}
+		}
+		if = {
+		    limit = {
+			    has_trait_xp = {
+					trait = backed_up
+					value >= 75
+				}
+			}
+			add = {
+				value = -25
+				desc = court_position_backed_up_high
+			}
+		}
+		add = court_position_aptitude_family_business_value
+		add = court_position_aptitude_low_penalty_value
+	}
+	
+	# Is this an available position for this court? (root is court owner)
+	is_shown = {
+		OR = {
+			domicile ?= { has_domicile_parameter = camp_unlocks_futa_nun }
+			AND = {
+				faith = faith:futa_carldenism
+				any_held_title ?= {
+					title_province ?= {
+						has_building_with_flag = futa_carldenism_nun_schools_flag
+					}
+				}
+			}
+		}
+	}
+	
+	is_shown_character = {
+		scope:employee = {
+			is_imprisoned = no
+			has_trait = futa_genetic
+			is_adult = yes
+		}
+	}
+	# They must have converted to serve as a Nun
+	valid_character = {
+	    scope:employee = {
+	        has_faith = faith:futa_carldenism 
+		    has_trait = devoted
+		    has_trait = futa_genetic
+		}
+	}
+	
+	revoke_cost = {
+		piety = {
+		    value = 100
+		}
+		prestige =  {
+			value = major_court_position_prestige_revoke_cost
+
+			# Set to 0 with Dynasty Perk Inner Circle
+			if = {
+				limit = {
+					exists = dynasty
+					dynasty = { has_dynasty_perk = fp2_coterie_legacy_1 }
+
+					employs_court_position = cultural_emissary_court_position
+					any_court_position_holder = {
+				        type = cultural_emissary_court_position
+						exists = dynasty
+						house = prev.house
+					}
+				}
+				multiply = 0
+			}
+			if = {
+				limit = {
+					exists = this
+					is_ai = yes
+				}
+				multiply = 0
+			}
+		}
+	}
+	
+	salary = {
+		#officers have no salary
+	}
+
+	scaling_employer_modifiers = {
+		terrible = {
+			general_opinion = 1
+			same_faith_opinion = 1
+			monthly_piety = 0.1
+		}
+		poor = {
+			general_opinion = 2
+			same_faith_opinion = 2
+			monthly_piety = 0.2
+		}
+		average = {
+			general_opinion = 3
+			same_faith_opinion = 3
+			monthly_piety = 0.3
+		}
+		good = {
+			general_opinion = 4
+			same_faith_opinion = 4
+			monthly_piety = 0.4
+		}
+		excellent = {
+			general_opinion = 5
+			same_faith_opinion = 5
+			monthly_piety = 0.5
+		}
+	}
+	
+	modifier = {
+		monthly_prestige = minor_court_position_prestige_salary
+		monthly_piety = 0.2
+	}
+	
+	on_court_position_received = {
+		basic_gained_court_position_effect = yes
+	}
+	on_court_position_revoked = {
+		basic_revoked_court_position_effect = yes
+	}
+	on_court_position_invalidated = {
+		basic_invalidated_court_position_effect = yes
+	}
+	candidate_score = {
+		value = 100
+		add = scope:base_value
+		add = court_position_candidate_score_base_value
+		add = court_position_candidate_aptitude_value
+		add = court_position_debt_considerations_value
+	}
+}

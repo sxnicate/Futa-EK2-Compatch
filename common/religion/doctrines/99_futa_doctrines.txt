@@ -1,0 +1,462 @@
+﻿# Finisher:
+# A new doctrine to handle the view towards Futanari. For it be added to religions, an on_action at gamestart needs to be setup
+
+futa_doctrine_futanari_equality = {
+	group = "crimes"
+	futa_doctrine_futanari_equality_vilified = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_vilified }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_crime }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_accepted }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_virtuous }
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_venerated }
+				multiply = faith_changed_doctrine_cost_mult_four_step
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+		}
+		traits = {
+			sins = { futa_genetic = 4 futa_impregnated = 4 }
+		}
+		parameters = {
+			futa_vilified = yes
+		}
+	}
+	futa_doctrine_futanari_equality_crime = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_vilified }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_crime }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_accepted }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_virtuous }
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_venerated }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+		}
+		parameters = {
+			futa_illegal = yes
+		}
+	}
+	futa_doctrine_futanari_equality_shunned = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_virtuous }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_venerated }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+		}
+		parameters = {
+			futa_shunned = yes
+		}
+	}
+	futa_doctrine_futanari_equality_accepted = {
+		piety_cost = {
+			value = faith_tenet_cost_massive
+			if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_crime }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_vilified }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+		}
+		parameters = {
+			futa_accepted = yes
+			futa_children_get_no_penalties = yes
+			futa_doctrine_enables_marriages = yes
+		}
+	}
+	futa_doctrine_futanari_equality_virtuous = {
+		can_pick = {
+			OR = {
+				custom_description = {
+					text = must_select_carnal_exaltation
+					doctrine:tenet_carnal_exaltation = { is_in_list = selected_doctrines }
+				}
+				religion = religion:futa_hermic_religion
+			}
+		}
+		piety_cost = {
+			value = faith_tenet_cost_massive
+			if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_virtuous }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_crime }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_vilified }
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+		}
+		traits = {
+			virtues = { futa_genetic futa_impregnated }
+		}
+		parameters = {
+			futa_virtuous = yes
+			futa_children_get_no_penalties = yes
+			futa_doctrine_enables_marriages = yes
+		}
+	}
+	futa_doctrine_futanari_equality_venerated = {
+		can_pick = {
+			OR = {
+				custom_description = {
+					text = must_select_carnal_exaltation
+					doctrine:tenet_carnal_exaltation = { is_in_list = selected_doctrines }
+				}
+				religion = religion:futa_hermic_religion
+			}
+		}
+		piety_cost = {
+			value = faith_tenet_cost_massive
+			if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_venerated }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_virtuous }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_shunned }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_crime }
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+			else_if = {
+				limit = { has_doctrine = futa_doctrine_futanari_equality_vilified }
+				multiply = faith_changed_doctrine_cost_mult_four_step
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+		}
+		traits = {
+			virtues = { futa_genetic = 4 futa_impregnated = 4 }
+		}
+		parameters = {
+			futa_venerated = yes
+			futa_children_get_no_penalties = yes
+			futa_doctrine_enables_marriages = yes
+		}
+	}
+}
+
+# Finisher:
+# Maybe we can overwrite this for Futa only Clergy?
+
+doctrine_clerical_gender = {
+	group = "clergy"
+	doctrine_clerical_gender_male_only = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = doctrine_clerical_gender_male_only }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_clerical_gender_female_only }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_clerical_gender_futa_only }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+		}
+		parameters = {
+			clergy_must_be_male = yes
+		}
+	}
+	doctrine_clerical_gender_female_only = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = doctrine_clerical_gender_female_only }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_clerical_gender_futa_only }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_clerical_gender_male_only }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+		}
+		parameters = {
+			clergy_must_be_female = yes
+		}
+	}
+	doctrine_clerical_gender_either = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = doctrine_clerical_gender_either }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			clergy_can_be_either_gender = yes
+		}
+	}
+	doctrine_clerical_gender_futa_only = {
+		can_pick = {
+			custom_tooltip = {
+				text = futa_must_be_accepted
+				OR = {
+					doctrine:futa_doctrine_futanari_equality_accepted = { is_in_list = selected_doctrines }
+					doctrine:futa_doctrine_futanari_equality_virtuous = { is_in_list = selected_doctrines }
+					doctrine:futa_doctrine_futanari_equality_venerated = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		piety_cost = {
+			value = faith_tenet_cost_massive
+			if = {
+				limit = { has_doctrine = doctrine_clerical_gender_futa_only }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_clerical_gender_female_only }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_clerical_gender_male_only }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_clerical_gender_either }
+				multiply = faith_changed_doctrine_cost_mult_four_step
+			}
+		}
+
+		parameters = {
+			clergy_must_be_female = yes # Keeping this here to handle the rest of the base game requirements and checks regarding clergy gender.
+			clergy_must_be_futa = yes
+		}
+	}
+}
+
+futa_special_doctrine_christian_righteousness = {
+	group = "special"
+
+	is_available_on_create = {
+		has_doctrine = futa_special_doctrine_christian_faith_is_righteous
+	}
+
+	futa_special_doctrine_christian_faith_is_righteous = {
+		parameters = {
+			hostility_override_special_doctrine_is_christian_faith = 0
+			#For loc:
+			futa_christian_faith_is_righteous_loc_override = 0
+			futa_christian_faiths_hostility_loc_override = 2
+
+			can_use_christian_artefacts = yes
+			# christian_syncretic_actor_opinion_active = yes
+			opinion_of_futa_hidden_doctrine_christianity_opinion_bonus = 20	# Sync with futa_christian_opinion_bonus_value
+			futa_christians_have_bonus_opinion = yes
+
+			futa_urges_are_suppressed = yes
+			futa_are_extra_stressed = yes
+		}
+
+		traits = {
+			virtues = { chaste = 2 celibate = 2 devoted compassionate }
+			sins = { lustful = 2 callous sadistic }
+		}
+
+		character_modifier = {
+			learning = 2
+			prowess = -4
+			religious_head_opinion = 10
+		}
+	}
+}
+
+futa_special_doctrine_captive_raids = {
+	group = "special"
+
+	is_available_on_create = {
+		has_doctrine = futa_special_doctrine_can_raid_for_captives
+	}
+
+	futa_special_doctrine_can_raid_for_captives = {
+		parameters = {
+			futa_enable_captive_raid_cb = yes
+		}
+
+		character_modifier = {
+			prowess = 2
+			raid_speed = 0.10
+		}
+	}
+}
+
+futa_special_doctrine_heralds = {
+	group = "special"
+
+	is_available_on_create = {
+		has_doctrine = futa_special_doctrine_heralds_of_the_skygod
+		NOR = {
+			has_doctrine = futa_doctrine_futanari_equality_vilified
+			has_doctrine = futa_doctrine_futanari_equality_crime
+			has_doctrine = futa_doctrine_futanari_equality_shunned
+		}
+	}
+
+	futa_special_doctrine_heralds_of_the_skygod = {
+		parameters = {
+			hostility_override_futa_special_doctrine_vilecore_hatred = 3
+			hostility_override_futa_doctrine_futanari_equality_vilified = 3
+			hostility_override_futa_doctrine_futanari_equality_crime = 3
+			hostility_override_futa_doctrine_futanari_equality_shunned = 3
+			hostility_override_futa_doctrine_futanari_equality_accepted = 1
+			hostility_override_futa_doctrine_futanari_equality_virtuous = 0
+			hostility_override_futa_doctrine_futanari_equality_venerated = 0
+			
+			# For Loc:
+			futa_sky_faith_non_accepted_futa_faiths_are_evil_loc = 3
+			futa_sky_faith_accepted_futa_faiths_are_astray_loc = 1
+			futa_sky_faith_worshipped_futa_faiths_are_rightous_loc = 0
+
+
+			divine_destiny_holy_war_cost_reduction = yes
+			futa_doctrine_enables_futa_tributary = yes
+			futa_enable_captive_raid_cb = yes
+			faith_can_raid = yes
+			unlock_voluntary_laampdom_faith = yes
+		}
+
+		character_modifier = {
+			martial = 1
+			maa_damage_mult = 0.05
+			men_at_arms_maintenance = -0.05
+			army_maintenance_mult = -0.05
+		}
+
+		traits = {
+			virtues = { brave vengeful }
+			sins = { craven }
+		}
+	}
+}
+
+futa_special_doctrine_vilecore = {
+	group = "special"
+
+	is_available_on_create = {
+		has_doctrine = futa_special_doctrine_vilecore_hatred
+		NOR = {
+			has_doctrine = futa_doctrine_futanari_equality_accepted
+			has_doctrine = futa_doctrine_futanari_equality_virtuous
+			has_doctrine = futa_doctrine_futanari_equality_venerated
+		}
+	}
+
+	futa_special_doctrine_vilecore_hatred = {
+		parameters = {
+			hostility_override_futa_hidden_doctrine_faithful_seeds = 1
+			hostility_override_futa_special_doctrine_heralds_of_the_skygod = 3
+			hostility_override_futa_doctrine_futanari_equality_accepted = 3
+			hostility_override_futa_doctrine_futanari_equality_virtuous = 3
+			hostility_override_futa_doctrine_futanari_equality_venerated = 3
+
+			# For Loc:
+			futa_vilecore_faith_accepted_futa_faiths_are_evil_loc = 3
+			
+			futa_vilecore_milandrites_are_accepted = yes
+		}
+
+		character_modifier = {
+
+		}
+
+		traits = {
+			virtues = { vengeful dark_sister }
+		}
+	}
+}
+
+# Basically a way to designate the Christian faiths opinion
+futa_hidden_doctrine_christianity_religion = {
+	group = "not_creatable"
+
+	is_available_on_create = {
+		OR = {
+			has_doctrine = futa_hidden_doctrine_christianity
+		}
+	}
+
+	futa_hidden_doctrine_christianity = {
+		visible = no
+		parameters = {
+			hostility_override_futa_special_doctrine_christian_faith_is_righteous = 2
+			futa_hidden_doctrine_christianity_opinion_bonus = yes
+		}
+	}
+}
+
+futa_hidden_doctrine_faithful_seeds_faith = {
+	group = "not_creatable"
+
+	is_available_on_create = {
+		OR = {
+			has_doctrine = futa_hidden_doctrine_faithful_seeds
+		}
+	}
+
+	futa_hidden_doctrine_faithful_seeds = {
+		visible = no
+		parameters = {
+			hostility_override_futa_special_doctrine_vilecore_hatred = 1
+		}
+	}
+}

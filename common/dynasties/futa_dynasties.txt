@@ -1,0 +1,22 @@
+﻿futa_isolde_dynasty = {
+	name = "suno"
+	culture = "akavir"
+}
+
+futa_warlord_dynasty = {
+	name = "azureflame"
+	culture = "futa_khatun"
+	motto = futa_warlord_dynasty_motto
+}
+
+futa_martiz_dynasty = {
+	name = "novoro"
+	culture = "perena"
+	motto = futa_martiz_dynasty_motto
+}
+
+futa_hermillia_dynasty = {
+	name = "myrune"
+	culture = "gemha"
+	motto = futa_hermillia_dynasty_motto
+}

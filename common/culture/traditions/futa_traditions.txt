@@ -1,0 +1,565 @@
+﻿
+# Finisher:
+# Your reward for diligently helping the Enclave! Makes the invasions better, faster, more lucrative to do. Plus unlocks a powerful MAA.
+futa_ally_of_the_enclave_culture = {
+	category = societal
+
+	layers = {
+		#0 = martial3
+		#1 = western3
+		4 = fally.dds
+	}
+
+	is_shown = {
+		scope:character = {
+			has_variable = enclave_points
+			OR = {
+				has_character_flag = enclave_flag
+				has_character_flag = has_contact_with_enclave_flag
+			}
+			dynasty ?= {
+				has_variable = successful_futa_invasions
+			}
+		}
+	}
+
+	can_pick = {
+		custom_tooltip = {
+			text = missing_required_successful_invasions
+			scope:character.dynasty ?= {
+				has_variable = successful_futa_invasions
+				var:successful_futa_invasions >= 5
+			} 
+		}		
+		scope:character = { 
+			has_variable = enclave_points
+			OR = {
+				#has_character_flag = futa_devout_supporter_of_the_enclave
+				futa_enclave_required_points_trigger = {
+					VALUE = 300
+				}
+			}			
+		}
+	}
+
+	parameters = {
+		futa_unlock_realm_guard = yes
+		futa_merchant_invasions_lower_cooldown = yes
+		futa_merchant_invasions_can_target_kingdoms = yes
+		futa_merchant_invasions_can_target_any_in_diplo_range = yes
+		futa_merchant_invasions_can_vassalize_invader = yes
+		futa_gains_yearly_goodwill = yes
+	}
+
+	culture_modifier = {
+
+	}
+
+	character_modifier = {
+
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = 4000
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOT = {
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+					}	
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = culture_not_bellicose
+				}	
+			}
+			if = {	# Make it more expensive if the char is not futa
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						scope:character = {
+							NOR = {
+								has_trait = futa_genetic
+								has_trait = backed_up
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_you_are_not_futa_desc
+				}
+			}
+			if = {	# Make it more expensive if the char does not have sponsored an invasion successfully
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						NOT = {
+							scope:character = {
+								has_character_flag = sponsored_successful_invasion
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_did_not_sponsor_a_successful_invasion_desc
+				}
+			}			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+	}
+}
+
+# Finisher:
+# The main to enable the new Futa Marriages, at the moment. Other than the Religious Doctrines. Is only gotten from a Temple Ruin.
+futa_ancient_marital_customs_culture = {
+	category = societal
+
+	layers = {
+		0 = learning
+		1 = mena
+		4 = fcust.dds
+	}
+
+	is_shown = {
+		scope:character = {
+			has_character_flag = futa_knows_ancient_marital_customs_flag
+		}
+	}
+
+	can_pick = {
+		custom_tooltip = {
+			text = futa_tradition_missing_flag_tt
+			scope:character = { 
+				has_character_flag = futa_knows_ancient_marital_customs_flag
+			}
+		}		
+	}
+
+	parameters = {
+		futa_unlock_futa_marriages = yes
+		futa_reverse_child_of_futa_penalties = yes
+		ai_doesnt_marry_outside_culture = yes
+		better_spouses = yes
+		loyal_trait_more_common = yes
+		loyal_trait_more_valued = yes
+		hostile_scheme_success_chance_vs_spouse_penalty = yes
+	}
+
+	culture_modifier = {
+
+	}
+
+	character_modifier = {
+		spouse_opinion = 10
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = 4000
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_egalitarian = { is_in_list = traits }
+					}	
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_communal_or_egalitarian_desc
+				}	
+			}
+			if = {	# Make it more expensive if you do not have a futa lover
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						scope:character = {
+							NOT = {
+								any_relation = {
+									type = lover
+									is_female = yes
+									has_trait = futa_genetic
+								}
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_you_do_not_have_a_correct_lover_desc
+				}
+			}
+			if = {
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						NOT = {
+							any_ruler = {
+								count >= 3
+								culture = prev
+								primary_title.tier >= tier_county
+								OR = {
+									any_child = {
+										count >= 3
+										has_trait = child_of_futa 
+									}
+									has_trait = child_of_futa
+								}
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_rulers_with_futa_born_children_desc
+				}
+			}
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+	}
+}
+
+# Finisher:
+# Is only gotten from a Temple Ruin.
+futa_sacred_procreation_culture = {
+	category = ritual
+
+	layers = {
+		0 = learning
+		1 = mena
+		4 = fproc.dds
+	}
+
+	is_shown = {
+		scope:character = {
+			has_character_flag = futa_knows_sacred_procreation_flag
+		}
+	}
+
+	can_pick = {
+		custom_tooltip = {
+			text = futa_tradition_missing_flag_tt
+			scope:character = { 
+				has_character_flag = futa_knows_sacred_procreation_flag
+			}
+		}		
+	}
+
+	parameters = {
+		futa_reverse_child_of_futa_penalties = yes
+		futa_child_of_futa_is_holy = yes
+		futa_stud_and_bitch_is_holy = yes
+		futa_procreation_with_futa_is_holy = yes
+		futa_piety_from_childbirth = yes
+		futa_high_tier_backed_up_opinion_is_positive = yes
+	}
+
+	culture_modifier = {
+		cultural_acceptance_gain_mult = -0.50
+	}
+
+	character_modifier = {
+		monthly_piety_gain_mult = -0.80
+		different_faith_county_opinion_mult = 1
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = 6000
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_communal_or_spiritual_desc
+				}
+			}
+			if = {	# Make it more expensive if you do not have a futa lover
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						scope:character.faith = {
+							NOT = {
+								has_doctrine_parameter = piety_from_childbirth_active
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_your_faith_missing_childbirth_piety_desc
+				}
+			}			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+	ai_will_do = {
+		value = 0
+	}
+}
+
+# Finisher:
+# Is only gotten from a Settlement.
+futa_hermillia_law_culture = {
+	category = realm
+
+	layers = {
+		0 = diplo
+		1 = western
+		4 = flaw.dds
+	}
+
+	is_shown = {
+		scope:character = {
+			OR = {
+				has_character_flag = futa_knows_hermillia_law_flag
+				any_equipped_character_artifact = {
+					has_variable = futa_hermillia_crown_artifact_variable
+				}
+			}
+		}
+	}
+
+	can_pick = {
+		custom_tooltip = {
+			text = futa_tradition_missing_flag_tt
+			scope:character = { 
+				has_character_flag = futa_knows_hermillia_law_flag
+			}
+		}		
+	}
+
+	parameters = {
+		female_preference_inheritance = yes
+		female_only_inheritance = yes
+		futa_reverse_child_of_futa_penalties = yes
+		futa_enables_hermillia_will_succession = yes
+		futa_enables_futa_tributary_vassal_contract = yes
+	}
+
+	culture_modifier = {
+		
+	}
+
+	character_modifier = {
+		opinion_of_male_rulers = -20
+		different_culture_opinion = -30
+		direct_vassal_opinion = -10
+		powerful_vassal_opinion = -30
+		councillor_opinion = 20
+		vassal_tax_contribution_mult = 0.10
+		intimidated_vassal_tax_contribution_mult = 0.30
+		cowed_vassal_tax_contribution_mult = 0.50
+		vassal_limit = 20
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = 6000
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_communal_or_spiritual_desc
+				}
+			}
+			if = {	# Make it more expensive if you do not have a futa lover
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						scope:character.faith = {
+							NOT = {
+								has_doctrine_parameter = piety_from_childbirth_active
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_your_faith_missing_childbirth_piety_desc
+				}
+			}			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+	ai_will_do = {
+		value = 0
+	}
+}
+
+futa_way_of_the_marauder_culture = {
+	category = combat
+
+	layers = {
+		#0 = martial3
+		#1 = western3
+		4 = fmau.dds
+	}
+
+	is_shown = {
+		scope:character = {
+			has_character_flag = futa_knows_way_of_the_marauder_flag
+		}
+	}
+
+	can_pick = {
+		custom_tooltip = {
+			text = futa_tradition_missing_flag_tt
+			scope:character = { 
+				has_character_flag = futa_knows_way_of_the_marauder_flag
+			}
+		}
+		custom_tooltip = {
+			text = futa_cannot_have_tradition_futa_legacy_of_the_struggle_culture
+			NOT = { culture_tradition:futa_legacy_of_the_struggle_culture = { is_in_list = traits } }
+		}		
+	}
+
+	parameters = {
+		culture_can_raid_over_land_even_if_feudal_no_restrictions = yes
+		futa_enable_captive_raid_cb = yes
+		futa_enable_grand_raid_cb = yes
+	}
+
+	culture_modifier = {
+		cultural_acceptance_gain_mult = -0.50
+	}
+
+	character_modifier = {
+		county_opinion_add = -10
+		different_culture_opinion = -30
+		raid_speed = 0.25
+		movement_speed_land_raiding = 0.10
+		hostile_county_attrition_raiding = -0.33
+		max_loot_mult = 0.50
+		diplomacy_per_prestige_level = -1
+		prowess_per_prestige_level = 2
+		martial_per_prestige_level = 1
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = 4000
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOT = {
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+					}	
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = culture_not_bellicose
+				}	
+			}
+			if = {	# Make it more expensive if the char is not futa
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						scope:character = {
+							NOR = {
+								has_trait = futa_genetic
+								has_trait = backed_up
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = futa_you_are_not_futa_desc
+				}
+			}			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+	}
+}

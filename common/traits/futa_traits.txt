@@ -1,0 +1,1129 @@
+﻿# Backed Up - The core trait
+#Backed Up
+backed_up = {
+	category = health
+	icon = backed_up.dds
+	# index = 7000
+	birth = 0
+	random_creation = 0
+	valid_sex = female
+
+	# Modifiers
+	diplomacy = 1
+	learning = 1
+	stress_gain_mult = -0.3
+	stress_loss_mult = 0.25
+	
+	shown_in_ruler_designer = no
+	
+	ruler_designer_cost = 0
+	
+	track = {
+		25 = {
+			intrigue = -1
+			diplomacy = -3
+	        learning = -3
+			prowess = 2
+			stress_gain_mult = 0.15
+		}
+		75 = {
+			intrigue = -2
+			diplomacy = -4
+	        learning = -5
+			stress_gain_mult = 0.3
+			attraction_opinion = -20
+			prowess = 6
+			general_opinion = -20
+			courtly_opinion = -10
+
+			culture_modifier = {
+				parameter = futa_high_tier_backed_up_opinion_is_positive
+
+				same_culture_opinion = 60
+			}
+		}
+	}
+
+	# AI Values
+	ai_sociability = medium_positive_ai_value
+	ai_rationality = -20
+
+	compatibility = {
+		# fat_balls = @pos_compat_low
+	}
+	
+	desc = {
+		first_valid = {
+			#The trait can never go higher than the first level if it's not assigned to a character
+			triggered_desc = {
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = trait_backed_up_1_desc
+			}
+			triggered_desc = {
+				trigger = { 
+					has_trait_xp = {
+						trait = backed_up
+						value >= 75
+					}
+				}
+				desc = trait_backed_up_3_desc
+			}
+			triggered_desc = {
+				trigger = { 
+					has_trait_xp = {
+						trait = backed_up
+						value >= 25
+					}
+				}
+				desc = trait_backed_up_2_desc
+			}
+			desc = trait_backed_up_1_desc
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = trait_backed_up_regular_desc
+			}
+		    triggered_desc = {
+				trigger = { 
+					has_character_flag = low_hanggers_flag
+				}
+				desc = trait_backed_up_low_hanggers_desc
+			}
+			triggered_desc = {
+				trigger = { 
+					has_character_flag = over_productive_flag
+				}
+				desc = trait_backed_up_over_productive_desc
+			}
+			triggered_desc = {
+				trigger = { 
+					has_character_flag = small_balls_flag
+				}
+				desc = trait_backed_up_small_balls_desc
+			}
+			desc = trait_backed_up_regular_desc
+		}
+	}
+}
+
+#Futa Fathered
+child_of_futa = {
+    icon = child_of_futa.dds
+	# index = 7001
+	birth = 0
+	random_creation = 0
+	category = fame
+	genetic = no
+	physical = no
+	
+	learning = -1
+	clergy_opinion = -15
+	same_opinion = 20
+
+	# Finisher:
+	# Add some modifier to reverse and even improve the effects of the trait.
+	# Since if you allow Futanari Marriages, you should not look down upon the children borne from that union.
+	culture_modifier = {
+		parameter = futa_reverse_child_of_futa_penalties
+
+		learning = 1
+		clergy_opinion = 15
+		same_culture_opinion = 5
+		monthly_prestige = 0.10
+	}
+	faith_modifier = {
+		parameter = futa_children_get_no_penalties
+
+		learning = 1
+		clergy_opinion = 15
+	}
+	culture_modifier = {
+		parameter = futa_child_of_futa_is_holy
+
+		clergy_opinion = 10
+		zealot_same_culture_opinion = 10
+		monthly_piety = 0.50
+	}
+
+	faith_modifier = {
+		parameter = futa_vilified
+		
+		county_opinion_add = -50
+		zealot_opinion = -30
+	}
+	faith_modifier = {
+		parameter = futa_illegal
+		
+		county_opinion_add = -25
+		zealot_opinion = -20
+	}
+	faith_modifier = {
+		parameter = futa_shunned
+		
+		county_opinion_add = -10
+		zealot_opinion = -10
+	}
+	
+	shown_in_ruler_designer = no
+	
+	name = trait_child_of_futa
+
+	ai_energy = 20
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = child_of_futa_desc
+			}
+			triggered_desc = {
+				trigger = { 
+				    has_variable = futa_preg_father 
+					has_variable = futa_preg_mother
+				}
+				desc = child_of_futa_parents_desc
+			}
+			desc = child_of_futa_desc
+		}
+	}
+}
+
+# Futa Siblings
+futa_siblings = {
+	name = {
+		first_valid = {
+			triggered_desc = { 
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = trait_futa_siblings
+			}
+			triggered_desc = { 
+				trigger = { 
+					has_variable = futa_twin
+				}
+				desc = trait_futa_siblings_twins
+			}
+			triggered_desc = { 
+				trigger = { 
+					has_variable = futa_triplet
+				}
+				desc = trait_futa_siblings_triplets
+			}
+			triggered_desc = { 
+				trigger = { 
+					has_variable = futa_quadruplet
+				}
+				desc = trait_futa_siblings_quadruplets
+			}
+			desc = trait_futa_siblings
+		}
+	}
+    icon = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = futa_twins.dds
+			}
+			
+			triggered_desc = {
+				trigger = { 
+					has_variable = futa_twin
+				}
+				desc = futa_twins.dds
+			}
+			
+			triggered_desc = {
+				trigger = { 
+					has_variable = futa_triplet
+				}
+				desc = futa_triplets.dds
+			}
+			
+			triggered_desc = {
+				trigger = { 
+					has_variable = futa_quadruplet
+				}
+				desc = futa_quadruplets.dds
+			}
+
+			desc = futa_twins.dds
+		}
+	}
+
+	# index = 7001
+	birth = 0
+	random_creation = 0
+	category = fame
+	genetic = no
+	physical = no
+	
+	# learning = -1
+	# clergy_opinion = -15
+	same_opinion = 10
+	
+	shown_in_ruler_designer = no
+
+	ai_energy = 20
+	
+	desc = {
+		first_valid = {
+			triggered_desc = { 
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = futa_siblings_desc
+			}
+			triggered_desc = { 
+				trigger = { 
+					has_variable = futa_twin
+				}
+				desc = futa_siblings_twins_desc
+			}
+			triggered_desc = { 
+				trigger = { 
+					has_variable = futa_triplet
+				}
+				desc = futa_siblings_triplets_desc
+			}
+			triggered_desc = { 
+				trigger = { 
+					has_variable = futa_quadruplet
+				}
+				desc = futa_siblings_quadruplets_desc
+			}
+			desc = futa_siblings_desc
+		}
+	}
+}
+
+# Finisher:
+# Instead of piggybacking off-of the vanilla pregnancy trait, I made a new impregnated trait to discern the two. 
+# Also allows to do belly growth and show the proper pregnancy period.
+futa_impregnated = {
+	icon = pregnant.dds
+	category = health
+	prowess = -2
+
+	# can_have_children = no	# Block having children
+	# fertility = -1000	# Block having children # Due to pregnancy chance overhaul, this should not lower fertility. Needs testing. Otherwise, can still use this and add exceptions to the chance value.
+
+	flag = no_message
+	
+	shown_in_ruler_designer = no
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_futa_impregnated_desc
+			}
+			desc = trait_futa_impregnated_character_desc
+		}
+	}
+
+	ai_energy = -15
+}
+
+#Femboi
+femboi = {
+    icon = femboi.dds
+	# index = 7002
+	birth = 0
+	random_creation = 0
+	category = health
+	genetic = no
+	physical = no
+	
+	prowess = -11
+	martial = -6
+	fertility = -1000
+	same_opinion = 10
+	
+	shown_in_ruler_designer = yes
+	
+	name = trait_femboi
+
+	ai_energy = -5
+	
+	desc = femboi_desc
+}
+
+#Futa Birth Tracker
+futa_bitch = {
+	category = fame
+	icon = futa_bitch.dds
+	# index = 7003
+	birth = 0
+	random_creation = 0
+	valid_sex = female
+
+	opposites = {
+		futa_stud
+	}
+
+	# Modifiers
+	opposite_opinion = 20
+
+	culture_modifier = {
+		parameter = futa_stud_and_bitch_is_holy
+
+		zealot_same_culture_opinion = 10
+		monthly_piety = 1
+		monthly_piety_gain_mult = 1.00
+	}
+	
+	shown_in_ruler_designer = no
+	
+	ruler_designer_cost = 0
+	
+	track = {
+		10 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.10
+				zealot_same_culture_opinion = 5
+				clergy_opinion = 5
+			}
+		}
+		20 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.20
+				zealot_same_culture_opinion = 5
+				clergy_opinion = 5
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		30 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.40
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		40 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.80
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		50 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			monthly_dynasty_prestige = 1.00
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 1.60
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		60 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			monthly_dynasty_prestige = 2.50
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 3.20
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		70 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			monthly_dynasty_prestige = 5.00
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 6.40
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		80 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			monthly_dynasty_prestige = 7.50
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 12.80
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		90 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			monthly_dynasty_prestige = 10.00
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 25.60
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		100 = {
+			futa_convert_sexuality_scheme_enemy_scheme_phase_duration_add = -10
+			futa_elope_enemy_scheme_phase_duration_add = -10
+			monthly_dynasty_prestige = 24.00
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 47.9
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 1.00
+			}
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = trait_futa_bitch_1_desc
+			}
+			triggered_desc = {
+				trigger = { 
+					has_trait_xp = {
+						trait = backed_up
+						value >= 100
+					}
+				}
+				desc = trait_futa_bitch_2_desc
+			}
+			desc = trait_futa_bitch_1_desc
+		}
+	}
+}
+
+#Futa Birth Tracker
+futa_stud = {
+	category = fame
+	icon = futa_stud.dds
+	# index = 7004
+	birth = 0
+	random_creation = 0
+	valid_sex = female
+
+	opposites = {
+		futa_bitch
+	}
+
+	# Modifiers
+	opposite_opinion = 20
+
+	culture_modifier = {
+		parameter = futa_stud_and_bitch_is_holy
+
+		zealot_same_culture_opinion = 10
+		monthly_piety = 1
+		monthly_piety_gain_mult = 1.00
+	}
+	
+	shown_in_ruler_designer = no
+	
+	ruler_designer_cost = 0
+	
+	track = {
+		10 = {
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.10
+				zealot_same_culture_opinion = 5
+				clergy_opinion = 5
+			}
+		}
+		20 = {
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.20
+				zealot_same_culture_opinion = 5
+				clergy_opinion = 5
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		30 = {
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+			owned_legend_spread_mult = 0.25
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.40
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		40 = {
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 0.80
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		50 = {
+			monthly_dynasty_prestige = 1.00
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+			owned_legend_spread_mult = 0.25
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 1.60
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		60 = {
+			monthly_dynasty_prestige = 2.50
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 3.20
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		70 = {
+			monthly_dynasty_prestige = 5.00
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+			owned_legend_spread_mult = 0.25
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 6.40
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		80 = {
+			monthly_dynasty_prestige = 7.50
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 12.80
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 0.25
+			}
+		}
+		90 = {
+			monthly_dynasty_prestige = 10.00
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+			owned_legend_spread_mult = 0.25
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 25.60
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+			}
+		}
+		100 = {
+			monthly_dynasty_prestige = 24.00
+			futa_convert_sexuality_scheme_scheme_phase_duration_add = -10
+			futa_elope_scheme_phase_duration_add = -10
+			owned_legend_spread_mult = 1
+
+			culture_modifier = {
+				parameter = futa_stud_and_bitch_is_holy
+				
+				monthly_piety = 47.9
+				zealot_same_culture_opinion = 10
+				clergy_opinion = 10
+				monthly_piety_gain_mult = 1.00
+			}
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					NOT = { exists = this } 
+				}
+				desc = trait_futa_stud_1_desc
+			}
+			triggered_desc = {
+				trigger = { 
+					has_trait_xp = {
+						trait = futa_stud
+						value >= 100
+					}
+				}
+				desc = trait_futa_stud_2_desc
+			}
+			desc = trait_futa_stud_1_desc
+		}
+	}
+}
+
+# Finisher:
+# The Futanari trait from Carnalitas. Need to overwrite the trait to apply the negatives/bonuses from the religious doctrine
+futa_genetic = {
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					has_game_rule = carn_futa_trait_name_hermaphrodite
+				}
+				desc = trait_futa_immersive
+			}
+			desc = trait_futa
+		}
+	}
+
+	genetic = yes
+	physical = yes
+	good = yes
+
+	birth = 0
+	random_creation = 0
+	
+	shown_in_ruler_designer = no
+
+	opposites = {
+		dark_sister
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_futa_desc
+			}
+			desc = trait_futa_character_desc
+		}
+	}
+
+	triggered_opinion = {
+		parameter = futa_vilified
+		opinion_modifier = futa_vilified
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = futa_illegal
+		opinion_modifier = futa_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = futa_shunned
+		opinion_modifier = futa_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	faith_modifier = {
+		parameter = futa_vilified
+		
+		county_opinion_add = -100
+		zealot_opinion = -100
+	}
+	faith_modifier = {
+		parameter = futa_illegal
+		
+		county_opinion_add = -50
+		zealot_opinion = -50
+	}
+	faith_modifier = {
+		parameter = futa_shunned
+		
+		county_opinion_add = -20
+		zealot_opinion = -20
+	}
+	faith_modifier = {
+		parameter = futa_virtuous
+		
+		county_opinion_add = 5
+	}
+	faith_modifier = {
+		parameter = futa_venerated
+		
+		county_opinion_add = 10
+	}
+
+	faith_modifier = {
+		parameter = futa_are_extra_stressed
+		
+		stress_gain_mult = 0.25
+	}
+
+	faith_modifier = {
+		parameter = futa_christians_have_bonus_opinion
+		
+		christianity_religion_opinion = 30
+	}
+}
+
+
+futa_milandrite = {
+	category = health
+	icon = futa_milandrite.dds
+
+	valid_sex = female
+
+	physical = yes
+
+	# potential = {
+	# 	OR = {
+	# 		has_trait = futa_genetic
+	# 		has_trait = futa
+	# 	}
+	# }
+
+	can_have_children = no
+
+	# Modifiers
+	# diplomacy = 1
+
+	# triggered_opinion = {
+	# 	parameter = futa_vilified
+	# 	opinion_modifier = futa_vilecore_milandrite_reverse_futa_penalty_shunned
+	# }
+	# triggered_opinion = {
+	# 	parameter = futa_illegal
+	# 	opinion_modifier = futa_vilecore_milandrite_reverse_futa_penalty_crime
+	# }
+	# triggered_opinion = {
+	# 	parameter = futa_shunned
+	# 	opinion_modifier = futa_vilecore_milandrite_reverse_futa_penalty_vilified
+	# }
+
+	faith_modifier = {
+		parameter = futa_vilecore_milandrites_are_accepted
+		
+		county_opinion_add = 100
+		zealot_opinion = 100
+		same_faith_opinion = 100
+	}
+	
+	
+	shown_in_ruler_designer = yes
+	
+	ruler_designer_cost = 0
+
+	birth = 0.05
+	random_creation = 0.05
+	inherit_chance = 5
+	
+	desc = futa_milandrite_desc
+
+	flag = futa_trait_block_womb
+}
+
+
+futa_restless = {
+	category = health
+	icon = restless.dds
+
+	valid_sex = female
+
+	physical = yes
+
+	potential = {
+		has_trait = backed_up
+	}
+
+	# Modifiers
+	diplomacy = -1
+	stress_gain_mult = 0.25
+	
+	shown_in_ruler_designer = no
+	
+	ruler_designer_cost = 0
+	
+	desc = futa_restless_desc
+}
+
+#Dark Sister
+dark_sister = {
+    icon = dark_sister.dds
+	birth = 0
+	random_creation = 0
+	valid_sex = female
+	category = lifestyle
+	genetic = no
+	physical = no
+	
+	potential = {
+		NOT = {
+		    has_trait = futa_genetic
+		}
+	}
+
+	opposites = {
+		futa_genetic
+	}
+	
+	intrigue = 3
+	learning = 3
+	same_opinion = 30
+	clergy_opinion = 20
+	opposite_opinion = -50
+	
+	shown_in_ruler_designer = no
+	
+	
+	#I should add a desc that stores a character as scope to represent a covern
+	# Done, I gotchu bby
+	desc = {
+		desc = dark_sister_desc
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = this
+					has_variable = futa_dark_sister_coven_leader
+					var:futa_dark_sister_coven_leader_amount_of_followers ?= 1
+				}
+				desc = dark_sister_desc_coven_leader_1
+			}
+			triggered_desc = {
+				trigger = {
+					exists = this
+					has_variable = futa_dark_sister_coven_leader
+					var:futa_dark_sister_coven_leader_amount_of_followers ?= 2
+				}
+				desc = dark_sister_desc_coven_leader_2
+			}
+			triggered_desc = {
+				trigger = {
+					exists = this
+					has_variable = futa_dark_sister_coven_leader
+					var:futa_dark_sister_coven_leader_amount_of_followers ?= 3
+				}
+				desc = dark_sister_desc_coven_leader_3
+			}
+			triggered_desc = {
+				trigger = {
+					exists = this
+					has_variable = futa_dark_sister_coven_follower
+				}
+				desc = dark_sister_desc_coven_follower
+			}
+		}
+	}
+
+	compatibility = {
+		futa_genetic = -20
+	}
+}
+
+#Destiny Birth
+futa_destiny_birth = {
+    icon = futa_destiny_birth.dds
+	birth = 0
+	random_creation = 0
+	category = health
+	genetic = no
+	physical = no
+	
+	portrait_extremity_shift = -0.15
+	ugliness_portrait_extremity_shift = -0.9
+	genetic_constraint_all = beauty_1
+	genetic_constraint_men = male_beauty_1
+	genetic_constraint_women = female_beauty_1
+	health = 1.5
+	prowess_no_portrait = 5
+	monthly_dynasty_prestige = 1
+	enemy_hostile_scheme_success_chance_growth_add = -3
+	
+	flag = immortal_incapability
+	flag = blocks_getting_non_epidemic_disease
+
+	flag = add_arcana_4
+	monthly_magic_lifestyle_xp_gain_mult = 0.2
+	
+	shown_in_ruler_designer = no
+	
+	
+	desc = futa_destiny_birth_desc
+}
+
+#Inquisitor Trait
+futa_inquiz = {
+    icon = futa_inquiz.dds
+	birth = 0
+	random_creation = 0
+	category = health
+	genetic = no
+	physical = no
+	
+	prowess_no_portrait = 4
+	christianity_religion_opinion = 20
+	flag = can_not_marry
+	
+	shown_in_ruler_designer = no
+	
+	
+	desc = futa_inquiz_desc
+}
+
+#Dark Sister Curse - Horse Teeth
+ds_ht = {
+    icon = ds_ht.dds
+	birth = 0
+	random_creation = 0
+	category = health
+	genetic = yes
+	physical = yes
+	
+	portrait_extremity_shift = 0.15
+	ugliness_portrait_extremity_shift = 0.7
+	diplomacy = -1
+	attraction_opinion = -20
+	
+	shown_in_ruler_designer = no
+	
+	
+	desc = ds_ht_desc
+}
+
+#Dark Sister Curse - Toad Skin
+ds_ts = {
+    icon = ds_ts.dds
+	birth = 0
+	random_creation = 0
+	category = health
+	genetic = yes
+	physical = yes
+	
+	portrait_extremity_shift = 0.2
+	ugliness_portrait_extremity_shift = 0.6
+	diplomacy = -1
+	attraction_opinion = -20
+	
+	shown_in_ruler_designer = no
+	
+	
+	desc = ds_ts_desc
+}
+
+#Dark Sister Curse - Goats Legs
+ds_gl = {
+    icon = ds_gl.dds
+	birth = 0
+	random_creation = 0
+	category = health
+	genetic = yes
+	physical = yes
+	
+	portrait_extremity_shift = 0.11
+	ugliness_portrait_extremity_shift = 0.8
+	diplomacy = -1
+	attraction_opinion = -20
+	
+	shown_in_ruler_designer = no
+	
+	
+	desc = ds_gl_desc
+}
+
+#Cardlenite Confessor
+futa_confessor = {
+    icon = confessor.dds
+	birth = 0
+	random_creation = 0
+	category = fame
+	genetic = no
+	physical = no
+	
+	learning = 1
+	same_faith_opinion = 12
+	
+	shown_in_ruler_designer = no
+	
+	track = {
+		60 = {
+			general_opinion = 10
+			#Unlocks Battle Nun MAA
+		}
+	}
+	
+	
+	desc = futa_confessor_desc
+}
+
+futa_merc = {
+    icon = fmerc.dds
+	birth = 0
+	random_creation = 0
+	category = fame
+	genetic = no
+	physical = no
+	
+	prowess = 4
+	fertility = 0.2
+	mercenary_hire_cost_mult = -0.7
+	general_opinion = -10
+	
+	shown_in_ruler_designer = no
+	
+	
+	desc = futa_merc_desc
+}

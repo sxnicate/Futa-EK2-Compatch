@@ -1,0 +1,1039 @@
+﻿# Gain Backed Up trait
+random_yearly_everyone_pulse = {
+	on_actions = {
+		on_add_backed_up
+		delay = { days = { 1 34 } }
+		passive_gain
+		delay = { days = { 5 10 } }
+		basic_pool
+		# childhood_pool
+		delay = { days = { 11 15 } }
+		relation_pool
+		delay = { days = { 16 19 } }
+		sexuality_pool
+		male_lover_pool
+		delay = { days = { 25 28 } }
+		female_lover_pool
+		delay = { days = { 20 24 } }
+		femboi_relation_pool
+		delay = { days = { 60 120 } }
+		small_sack_pool
+	}
+}
+
+on_add_backed_up = {	
+	trigger = {
+		has_trait = futa_genetic
+		is_adult = yes
+		NOT = { has_trait = backed_up }
+		NOR = {
+			has_character_flag = futa_warlord_is_sterile_flag
+		}
+	}
+	
+	events = {
+		delay = { days = { 2 12 } }
+		
+		futa_events.0001
+	}
+}
+
+passive_gain = {	
+	trigger = {
+		has_trait = backed_up
+		NOR = {
+			has_character_flag = futa_untamed_bodyguard_flag
+			has_character_flag = futa_warlord_is_sterile_flag
+		}
+	}
+
+	random_events = {
+		chance_of_no_event = {	# Wish there was a better way to do this, as it bloats the file a little. # Might've found a way to do it better :>
+			value = 0
+			add = futa_events_freq_value
+		}
+
+		delay = { days = { 1 34 } }
+
+		100 = futa_events.0002
+	}
+}
+
+basic_pool = {	
+	trigger = {
+		OR = {
+			is_landed = yes
+			is_courtier = yes
+		}
+		has_trait = backed_up
+		is_imprisoned = no
+		OR = {
+			is_at_war = no
+			is_in_army = no
+		}
+		NOR = {
+			has_character_flag = futa_untamed_bodyguard_flag
+			has_character_flag = futa_warlord_is_sterile_flag	
+		}
+		futa_disable_events_carldenism_trigger = no
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_events_freq_value
+		}
+
+        50 = futa_events.0010 # Bumpy Dressing
+		50 = futa_events.0025 # Outdated Passions
+		50 = futa_events.0028 # The Right Choice
+		50 = futa_events.0100 # The Price of Knowledge
+		70 = 0
+    }
+}
+
+on_birthday = {
+	on_actions = {
+		childhood_pool
+	}
+}
+
+childhood_pool = {	
+	trigger = {
+		has_trait = futa_genetic
+		age = 9
+	}
+	
+	events = {
+		futa_events.0018
+		delay = { days = { 2 6 } }		
+		child_personality.4013	# Finisher: Childhood sexuality assignment event. Guaranteed Bisexual. Feels fitting and not awkward when you get backed up later.
+	}
+}
+
+relation_pool = {
+	trigger = {
+		has_trait = backed_up
+		is_imprisoned = no
+		any_relation = {
+        	type = lover
+			is_imprisoned = no
+			futa_disable_events_carldenism_trigger = no
+        }
+		futa_disable_events_carldenism_trigger = no
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_relation_events_freq_value
+		}
+
+        75 = futa_events.0035 # Lusty Snack
+		80 = futa_events.0039 # Futa Passion
+		70 = futa_events.0068 # Morning Rut
+		75 = futa_events.0071 # Polished Balls
+		70 = futa_events.0096 # You like me, I like you
+		60 = futa_events.0176 # Love in the Sun
+		10 = 0
+    }
+}
+
+sexuality_pool = {	
+	trigger = {
+	    is_adult = yes
+		is_female = yes
+		NOT = {
+			has_sexuality = bisexual
+		}
+		NOR = {
+			has_trait = futa_genetic
+			has_trait = backed_up
+		}
+		any_courtier_or_guest = {
+			has_trait = futa_genetic
+		}
+	}
+	
+	events = {
+		delay = { days = { 1 4 } }
+		
+		futa_events.0054
+	}
+}
+
+male_lover_pool = {
+	trigger = {
+		is_male = yes
+		is_imprisoned = no
+		any_relation = {
+        	type = lover
+			has_trait = backed_up
+			is_imprisoned = no
+			futa_disable_events_carldenism_trigger = no
+        }
+		futa_disable_events_carldenism_trigger = no
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_relation_events_freq_value
+		}
+
+        100 = futa_events.0129 # Provoking Snake
+		100 = futa_events.0136 # Wet Dreams
+		100 = 0
+    }
+}
+
+female_lover_pool = {
+	trigger = {
+		is_female = yes
+		NOT = {
+			has_trait = backed_up
+		}
+		is_imprisoned = no
+		any_relation = {
+        	type = lover
+			has_trait = backed_up
+			is_imprisoned = no
+			futa_disable_events_carldenism_trigger = no
+        }
+		futa_disable_events_carldenism_trigger = no
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_relation_events_freq_value
+		}
+
+        100 = futa_events.0139 # He'll never know
+        100 = futa_events.0281 # Sleepless Night
+		100 = 0
+    }
+}
+
+femboi_relation_pool = {
+	trigger = {
+		has_trait = femboi
+		is_imprisoned = no
+		any_relation = {
+        	type = lover
+			has_trait = backed_up
+			is_imprisoned = no
+			futa_disable_events_carldenism_trigger = no
+        }
+		futa_disable_events_carldenism_trigger = no
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_femboi_events_freq_value
+		}
+
+        100 = futa_events.0267 # Girlcock Worship
+		100 = 0
+    }
+}
+
+small_sack_pool = {	
+	trigger = {
+		has_trait = backed_up
+		has_character_flag = small_balls_flag
+		is_adult = yes
+		futa_disable_events_carldenism_trigger = no
+		NOT = {
+			has_character_flag = futa_untamed_bodyguard_flag
+		}
+	}
+
+	random_events = {
+		chance_of_no_event = {	# Wish there was a better way to do this, as it bloats the file a little.
+			value = 0
+			add = futa_events_freq_value
+		}
+
+		50 = futa_events.0276 # Nuts to Orbs
+		50 = 0
+	}
+}
+
+# Panty Problems
+five_year_everyone_pulse = {
+	on_actions = {
+		on_panty_problem	
+	}
+}
+
+on_panty_problem = { 
+	trigger = {
+		has_trait = backed_up
+		is_imprisoned = no
+		NOR = {
+			has_character_flag = futa_untamed_bodyguard_flag
+			has_character_flag = futa_warlord_is_sterile_flag	
+		}
+		futa_disable_events_carldenism_trigger = no
+	}
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_events_freq_value
+		}
+
+		100 = futa_events.0003
+	}
+}
+
+# Common Ruler Events
+quarterly_playable_pulse = {
+    on_actions = {
+		general_futa_quarter
+	}
+}
+
+general_futa_quarter = {	
+	trigger = {
+		OR = {
+			is_landed = yes
+			is_courtier = yes
+		}
+		has_trait = backed_up
+		is_imprisoned = no
+		OR = {
+			is_at_war = no
+			is_in_army = no
+		}
+		NOR = {
+			has_character_flag = futa_untamed_bodyguard_flag
+			has_character_flag = futa_warlord_is_sterile_flag	
+		}
+		futa_disable_events_carldenism_trigger = no
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_events_freq_value
+		}
+
+        60 = futa_events.0007 # Rising Desire
+		40 = futa_events.0015 # Secret Sauce
+		40 = futa_events.0019 # What have you got
+		40 = futa_events.0022 # Buyer's eye
+		40 = futa_events.0052 # Dancing Rod
+		40 = futa_events.0055 # What have you got - Together
+		40 = futa_events.0128 # Passing Aches
+		80 = 0
+    }
+}
+
+## Human Players only
+random_yearly_playable_pulse = {
+	on_actions = {
+		fknight_pulse
+		delay = { days = { 5 10 } }
+		not_futa_pool
+		delay = { days = { 7 14 } }
+		recruited_fknight_tier1
+	}
+}
+
+fknight_pulse = {
+    trigger = {
+        is_landed = yes
+		is_adult = yes
+		is_ai = no
+		is_imprisoned = no
+		NOT = { has_trait = futa_genetic }
+		NOT = { has_global_variable = fknight_is_alive } # Prevents a new fknight from spawning when one is still alive
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_knight_events_freq_value
+		}
+
+        100 = futa_events.0043 # The Futa Knight
+		100 = 0
+    }
+}
+
+not_futa_pool = {
+    trigger = {
+	    is_landed = yes
+		# Also prevent them from forming relations?
+		NOR = {
+			faith = {
+				has_doctrine_parameter = futa_urges_are_suppressed
+			}
+		}
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_events_freq_value
+		}
+
+        100 = futa_events.0059 # AI Futa Relations
+		100 = 0
+    }
+}
+
+recruited_fknight_tier1 = {
+    trigger = {
+        is_landed = yes
+		is_adult = yes
+		is_ai = no
+		is_imprisoned = no
+		NOT = { has_trait = futa_genetic }
+		any_courtier_or_guest = {
+			has_character_flag = fknight_flag
+		}
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_knight_events_freq_value
+		}
+
+        100 = futa_events.0075 # Her Chivalry In Need
+		100 = futa_events.0076 # On her honour
+		100 = futa_events.0077 # No Sympathy For The Wicked
+		100 = futa_events.0078 # A Dance of Strikes
+		100 = futa_events.0079 # Throbbing Pulse
+		50 = 0
+    }
+}
+
+##Raid Events
+on_raid_action_completion = {
+    on_actions = {
+		futa_raid_complete_on_action # Needed to not override vanilla function
+	}
+}
+
+futa_raid_complete_on_action = {
+	trigger = { 
+		scope:raider = {
+			futa_disable_events_carldenism_trigger = no
+		}
+	}
+
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_events_freq_value
+		}
+
+		100 = futa_events.0091 # staging event for Raiding Tendencies
+	}
+}
+
+##Futanari Enclave Events
+on_game_start_after_lobby = {
+    on_actions = {
+		futa_traveler_appear_action
+	}
+}
+
+futa_traveler_appear_action = { 	
+	effect = {
+		every_player = {
+			trigger_event = {
+				id = futa_events.0114 #Displaced Misplaced
+				years = 5
+			}
+		}
+	}
+}
+
+random_yearly_playable_pulse = {
+	on_actions = {
+		enclave_migrant
+		delay = { days = { 1 7 } }
+		enclave_events
+		delay = { days = { 10 14 } }
+		femboi_approach
+	}
+}
+
+enclave_migrant = {
+    trigger = {
+		has_character_flag = enclave_flag
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_enclave_events_freq_value
+		}
+
+        100 = futa_events.0117 # Futa Enclave Generation
+    }
+}
+
+enclave_events = {
+    trigger = {
+		is_landed = yes
+		has_character_flag = enclave_flag
+		is_imprisoned = no
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_enclave_events_freq_value
+		}
+
+        100 = futa_events.0118 # Dark Seed
+		100 = futa_events.0119 # Sour Start
+		100 = futa_events.0120 # Rubbing to cross
+		100 = futa_events.0123 # Time of need
+		100 = futa_events.0138 # Her and Her’s
+		100 = futa_events.0178 # Hanging out
+		50 = 0
+    }
+}
+
+# Court Fuck Sleeve Events
+quarterly_playable_pulse = {
+    on_actions = {
+		owns_fucksleeve_quarter
+	}
+}
+
+owns_fucksleeve_quarter = {	
+	trigger = {
+		is_imprisoned = no
+		any_court_position_holder ?= {
+            type = futa_fucksleeve_court_position
+			is_imprisoned = no
+        }
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_events_freq_value
+		}
+
+        60 = futa_events.0142 # fucksleeve danced
+		40 = futa_events.0143 # Fucksleeve Cream Pie
+		80 = 0
+    }
+}
+
+femboi_approach = {
+    trigger = {
+		has_character_flag = enclave_flag
+		is_adult = yes
+		global_var:enclave_tier = 4
+		NOT = {
+		    dynasty = {
+                has_dynasty_modifier = femboi_acceptance
+            }
+		}
+		futa_disable_events_carldenism_trigger = no
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_femboi_events_freq_value
+		}
+
+        100 = futa_events.0243 # Changing Roles
+    }
+}
+
+# Enclave Rank Based Events
+five_year_playable_pulse = {
+	on_actions = {
+		on_fsociety
+		delay = { days = { 10 17 } }
+		frep_pulse
+		delay = { days = { 10 17 } }
+		no_frep_pulse
+		delay = { days = { 21 28 } }
+		fembois_accepted_pulse
+		delay = { days = { 9 27 } }
+		is_femboi_pulse
+	}
+}
+
+on_fsociety = {
+    trigger = {
+		is_landed = yes
+		has_character_flag = enclave_flag
+		is_adult = yes
+		is_imprisoned = no
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_enclave_events_freq_value
+		}
+
+        100 = futa_events.0182 # Fsociety Selector
+    }
+}
+
+frep_pulse = {
+    trigger = {
+		has_character_flag = enclave_flag
+		is_landed = yes
+		is_adult = yes
+		is_imprisoned = no
+		any_court_position_holder ?= {
+            type = enclave_rep_court_position
+        }
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_enclave_events_freq_value
+		}
+
+        100 = futa_events.0189 # Frep Selector
+    }
+}
+
+no_frep_pulse = {
+    trigger = {
+		has_character_flag = enclave_flag
+		is_landed = yes
+		is_adult = yes
+		is_imprisoned = no
+	    NOT = {
+		    any_court_position_holder ?= {
+                type = enclave_rep_court_position
+            }
+		}
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_enclave_events_freq_value
+		}
+
+        100 = futa_events.0203 # Frepless Selector
+    }
+}
+
+fembois_accepted_pulse = {
+    trigger = {
+		dynasty ?= {
+            has_dynasty_modifier = femboi_acceptance
+        }
+		is_landed = yes
+		is_adult = yes
+		is_imprisoned = no
+		futa_disable_events_carldenism_trigger = no
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_femboi_events_freq_value
+		}
+
+        100 = futa_events.0248 # Hard Diplomacy
+		100 = futa_events.0252 # Disciplinary Action
+		100 = futa_events.0254 # Girlcock Idol
+		100 = futa_events.0255 # Breaking Pride
+		100 = futa_events.0256 # Side Dick
+		100 = futa_events.0257 # Reports of Feminisation
+		100 = futa_events.0258 # Aim to please
+		100 = futa_events.0261 # Back-up Wives
+		100 = futa_events.0270 # Staged Appearance
+    }
+}
+
+is_femboi_pulse = {
+    trigger = {
+		has_trait = femboi
+		is_adult = yes
+		is_imprisoned = no
+		futa_disable_events_carldenism_trigger = no
+    }
+
+    random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_femboi_events_freq_value
+		}
+	
+		100 = futa_events.0262 # Sticking Out
+		100 = futa_events.0266 # Your True Image
+    }
+}
+
+
+# ---------------------------------------------------------------------------- #
+#                                    TESTING                                   #
+# ---------------------------------------------------------------------------- #
+
+
+# Court Fuck Sleeve Events
+random_yearly_everyone_pulse = {
+    on_actions = {
+		delay = { days = { 1 34 } }
+		futa_has_consort
+		female_has_futa_consort
+		futa_has_femboi_consort
+		delay = { days = { 1 34 } }
+		futa_relations_roll_for_impregnation_pulse
+	}
+}
+
+# Finisher: Triggers from Futa POV.
+futa_has_consort = {	
+	trigger = {
+		has_trait = backed_up
+		is_imprisoned = no
+		any_consort = {
+        	is_female = yes
+			is_imprisoned = no
+        }
+		futa_disable_events_carldenism_trigger = no
+	}
+	
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_consort_events_freq_value
+		}
+
+		100 = futa_events.0285 # The Ass I Married - Futa X Wife
+		100 = futa_events.0287 # The Sapphic Union - Futa X Wife
+		100 = futa_events.0289 # Mirrored Hearts, Mirrored Bond - Futa X Wife
+		100 = futa_events.0290 # To Please and Serve - Futa X Concubine
+		100 = futa_events.0291 # A Concubine’s Fate - Futa X Concubine
+		100 = 0
+    }
+}
+
+# Finisher: Triggers from Female POV
+female_has_futa_consort = {
+	trigger = {
+		NOT = {
+			has_trait = backed_up
+		}
+		is_imprisoned = no
+		is_male = no
+		any_consort = {
+			is_female = yes
+			is_imprisoned = no
+			has_trait = backed_up
+			trigger_if = {
+				limit = { 
+					is_concubine = no
+				}
+				futa_disable_events_carldenism_trigger = no
+			}
+		}
+	}
+
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_consort_events_freq_value
+		}
+
+		100 = 0
+		100 = futa_events.0324 # Dominant Tricks
+		100 = futa_events.0326 # Cuddle Humps
+    }
+}
+
+# Finisher: Triggers from Futa POV
+futa_has_femboi_consort = {
+	trigger = {
+		has_trait = backed_up
+		is_imprisoned = no
+		any_consort = {
+        	is_male = yes
+			is_imprisoned = no
+			has_trait = femboi
+        }
+		futa_disable_events_carldenism_trigger = no
+	}
+
+	random_events = {
+		chance_of_no_event = {
+			value = 0
+			add = futa_femboi_events_freq_value
+		}
+
+        100 = futa_events.0327 # A Bitch’s Duty
+		100 = 0
+    }
+}
+
+# Finisher: Triggers from Lover POV. No notifications attached to it. Basically simulates the base game impregnations, no need for an event pop-up for every pregnancy roll in a marriage
+# I feel like some of them can happen "in the background"
+# From lover POV so every lover has a chance to equally get pregnant, otherwise if you are in a multi-marriage, you only get to knock up one of your spouses per go :(
+# Flood the world with babis!
+futa_relations_roll_for_impregnation_pulse = {	
+	trigger = {
+		has_game_rule = futa_relations_background_impregnations_enabled
+		is_female = yes
+		is_imprisoned = no
+		OR = {
+			any_consort ?= {
+				is_female = yes
+				is_imprisoned = no
+				has_trait = backed_up
+				futa_disable_events_carldenism_trigger = no
+				NOT = {
+					this = root
+				}
+			}
+			any_relation ?= {
+				type = lover
+				is_female = yes
+				is_imprisoned = no
+				has_trait = backed_up
+				futa_disable_events_carldenism_trigger = no
+				NOT = {
+					this = root
+				}
+			}
+		}
+	}
+	
+	random_events = {
+		100 = futa_events.9000 # Have sex with consort
+		100 = futa_events.9001 # Have sex with lover
+		50 = 0
+    }
+}
+
+
+
+# Finisher:
+# New Restless trait pulse
+
+random_yearly_everyone_pulse = {
+	on_actions = {
+		restless_pulse
+		delay = { days = { 1 34 } }
+		futa_faith_suppressed_urges_restless
+	}
+}
+
+
+futa_faith_suppressed_urges_restless = {	
+	trigger = {
+		has_trait = backed_up
+		has_trait_xp = {
+			trait = backed_up
+			value >= 75
+		}
+		faith = {
+			has_doctrine_parameter = futa_urges_are_suppressed
+		}
+		NOT = {
+			has_trait = futa_restless
+		}
+		NOT = {
+			has_character_flag = futa_untamed_bodyguard_flag
+		}
+	}
+
+	effect = {
+		if = {
+			limit = { 
+				NOT = {
+					has_variable = frestless
+				}
+			}
+			send_interface_message = {
+				type = futa_event_bad_with_text
+				title = futa_is_becoming_restless_title
+				desc = futa_is_becoming_restless_desc
+				right_icon = root
+				set_variable = {
+					name = frestless
+					value = 0
+				}
+			}
+		}
+		else_if = {
+			limit = { 
+				var:frestless < 10 
+			}
+			send_interface_message = {
+				type = futa_event_bad_with_text
+				title = futa_is_becoming_restless_title
+				desc = futa_is_becoming_restless_desc
+				right_icon = root
+				change_variable = {
+					name = frestless
+					add = 1
+				}
+			}
+		}
+		else = {
+			trigger_event = {
+				id = futa_events.0311 # Futa Becomes Restless due to Repressed Urges
+			}
+		}
+	}
+}
+
+restless_pulse = {
+    trigger = {
+		has_trait = futa_restless
+    }
+
+    random_events = {
+
+        50 = futa_events.0312 # Sating One’s Self
+		50 = 0
+    }
+}
+
+#Futanari Travel Events
+on_travel_plan_movement = {
+	on_actions = {
+		vilecore_travel
+	}
+}
+
+vilecore_travel = {
+	trigger = {
+		has_trait = dark_sister
+		is_female = yes
+        is_adult = yes
+		has_faith = faith:futa_pact_of_vilecore
+		NOT = { has_trait = futa_genetic }
+	}
+	
+	random_events = {
+		chance_to_happen = 100
+
+		10 = futa_religion_events.0008 #Prey in the Dark
+		70 = 0
+	}
+}
+
+##Meme Event
+random_yearly_everyone_pulse = {
+	on_actions = {
+		xmas_pulse
+	}
+}
+
+xmas_pulse = {
+    trigger = {
+		is_ai = no
+		current_month = 12
+		is_adult = yes
+	}
+
+    random_events = {
+		chance_to_happen = 100
+
+		5 = futa_events.0315 #The Season of Giving
+		95 = 0
+	}
+}
+
+
+# Finisher: Grand Wedding Bedding Night Event Pool
+
+wedding_wnight_spouse_event_pulse = {
+	on_actions = {
+		delay = { days = 1 }
+		futa_pov_grand_wedding_bedding_night_pulse
+	}
+}
+
+# Triggers from Futa POV
+futa_pov_grand_wedding_bedding_night_pulse = {
+	trigger = {
+		has_ep2_dlc_trigger = yes
+		OR = { #you are one of the spouses
+			root = scope:activity.special_guest:spouse_1
+			root = scope:activity.special_guest:spouse_2
+		}
+		OR = {
+			scope:activity.special_guest:spouse_1 = {
+				has_trait = futa_genetic
+				this = root
+				futa_disable_events_carldenism_trigger = no
+			}
+			scope:activity.special_guest:spouse_2 = {
+				has_trait = futa_genetic
+				this = root
+				futa_disable_events_carldenism_trigger = no
+			}
+		}
+	}
+
+	random_events = {
+		# 100 = 0
+		100 = futa_events.0322
+	}
+}
+
+on_marriage = {
+	on_actions = {
+		futa_pov_on_marriage_events
+	}
+}
+
+futa_pov_on_marriage_events = {
+	trigger = {
+		OR = {
+			AND = {
+				has_trait = futa_genetic
+				futa_disable_events_carldenism_trigger = no
+			}
+			scope:spouse = {
+				has_trait = futa_genetic
+				futa_disable_events_carldenism_trigger = no
+			}
+		}
+	}
+
+	effect = {
+		if = {
+			limit = { 
+				has_trait = futa_genetic
+			}
+			trigger_event = {
+				on_action = futa_pov_on_marriage_events_pool
+			}
+		}
+		else = {
+			save_scope_as = non_futa_spouse
+			scope:spouse = {
+				scope:non_futa_spouse = {
+					save_scope_as = spouse
+				}
+				trigger_event = {
+					on_action = futa_pov_on_marriage_events_pool
+				}
+			}
+		}
+	}
+}
+
+futa_pov_on_marriage_events_pool = {
+
+	random_events = {
+		100 = futa_marriage_event.0001
+	}
+}

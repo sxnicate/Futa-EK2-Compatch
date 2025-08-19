@@ -1,0 +1,260 @@
+﻿# Finisher:
+# Scripted effect to assign the equality doctrine
+futa_equality_doctrine_assign_effect = {
+	if = {
+		limit = {
+			NOR = {
+				has_doctrine = futa_doctrine_futanari_equality_vilified
+				has_doctrine = futa_doctrine_futanari_equality_crime
+				has_doctrine = futa_doctrine_futanari_equality_shunned
+				has_doctrine = futa_doctrine_futanari_equality_accepted
+				has_doctrine = futa_doctrine_futanari_equality_virtuous
+				has_doctrine = futa_doctrine_futanari_equality_venerated
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_dynamic
+			}
+			if = {
+				limit = { 
+					OR = {
+						this ?= faith:hero_cult
+						this ?= faith:imperial_cult
+					}
+				}
+				add_doctrine = futa_doctrine_futanari_equality_crime
+			}
+			else_if = {
+				limit = { 
+					religion ?= religion:aldmeri_religion
+					religion ?= religion:bosmeri_religion
+					religion ?= religion:marukhati_religion
+					religion ?= religion:nedic_nordic_religion
+					religion ?= religion:trinimac_religion
+					religion ?= religion:yoku_religion
+					religion ?= religion:akaviri_religion
+					religion ?= religion:atmoran_religion
+					religion ?= religion:celestial_religion
+					religion ?= religion:deepones_religion
+					religion ?= religion:dwemeri_religion
+					religion ?= religion:hist_religion
+					religion ?= religion:imga_religion
+					religion ?= religion:khaajiiti_religion
+					religion ?= religion:necromantic_religion
+					religion ?= religion:sithis_religion
+					religion ?= religion:stone_religion
+					religion ?= religion:vampire_religion
+					religion ?= religion:wyrd_religion
+				}
+				add_doctrine = futa_doctrine_futanari_equality_shunned
+			}
+			else_if = {
+				religion ?= religion:aldmeri_religion
+					religion ?= religion:bosmeri_religion
+					religion ?= religion:marukhati_religion
+					religion ?= religion:nedic_nordic_religion
+					religion ?= religion:trinimac_religion
+					religion ?= religion:yoku_religion
+					religion ?= religion:akaviri_religion
+					religion ?= religion:atmoran_religion
+					religion ?= religion:celestial_religion
+					religion ?= religion:deepones_religion
+					religion ?= religion:dwemeri_religion
+					religion ?= religion:hist_religion
+					religion ?= religion:imga_religion
+					religion ?= religion:khaajiiti_religion
+					religion ?= religion:necromantic_religion
+					religion ?= religion:sithis_religion
+					religion ?= religion:stone_religion
+					religion ?= religion:vampire_religion
+					religion ?= religion:wyrd_religion
+				}
+				add_doctrine = futa_doctrine_futanari_equality_crime
+			}
+			else_if = {
+				limit = { 
+					has_doctrine_parameter = homosexuality_accepted
+				}
+				add_doctrine = futa_doctrine_futanari_equality_accepted
+			}
+			else_if = {
+				limit = { 
+					has_doctrine_parameter = homosexuality_shunned
+				}
+				add_doctrine = futa_doctrine_futanari_equality_shunned
+			}
+			else_if = {
+				limit = { 
+					has_doctrine_parameter = homosexuality_illegal
+				}
+				add_doctrine = futa_doctrine_futanari_equality_crime
+			}
+
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_shunned
+			}
+			add_doctrine = futa_doctrine_futanari_equality_shunned
+
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_criminal
+			}
+			add_doctrine = futa_doctrine_futanari_equality_crime
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_vilified
+			}
+			add_doctrine = futa_doctrine_futanari_equality_vilified
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_accepted
+			}
+			add_doctrine = futa_doctrine_futanari_equality_accepted
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_virtuous
+			}
+			add_doctrine = futa_doctrine_futanari_equality_virtuous
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_venerated
+			}
+			add_doctrine = futa_doctrine_futanari_equality_venerated
+		}
+	}
+	else_if = {
+		limit = { 
+			NOT = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_dynamic
+				has_variable = futa_equality_doctrines_seeded
+			}
+			OR = {
+				this ?= faith:futa_hermillian
+				this ?= faith:futa_faithful_seeds
+				this ?= faith:futa_carldenism
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_shunned
+			}
+			add_doctrine = futa_doctrine_futanari_equality_shunned
+
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_criminal
+			}
+			add_doctrine = futa_doctrine_futanari_equality_crime
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_vilified
+			}
+			add_doctrine = futa_doctrine_futanari_equality_vilified
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_accepted
+			}
+			add_doctrine = futa_doctrine_futanari_equality_accepted
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_virtuous
+			}
+			add_doctrine = futa_doctrine_futanari_equality_virtuous
+		}
+		if = {
+			limit = {
+				has_game_rule = futa_faith_equality_doctrine_seeding_venerated
+			}
+			add_doctrine = futa_doctrine_futanari_equality_venerated
+		}
+		set_variable = futa_equality_doctrines_seeded
+	}
+
+	if = {
+		limit = { 
+			religion ?= religion:nedic_nordic_religion
+		}
+		add_doctrine = futa_hidden_doctrine_nedic_nordic
+	}
+}
+
+futa_vilecore_induct_into_dark_coven_effect = {
+	save_scope_as = futa_dark_coven_inductor
+	if = {
+		limit = { 
+			NOT = {
+				has_variable = futa_dark_sister_coven_leader
+			}
+		}
+		set_variable = futa_dark_sister_coven_leader
+	}
+	if = {
+		limit = { 
+			NOT = {
+				has_variable = futa_dark_sister_coven_leader_amount_of_followers
+			}
+		}
+		set_variable = {
+			name = futa_dark_sister_coven_leader_amount_of_followers
+			value = 0
+		}
+	}
+
+	if = {
+		limit = { 
+			NOT = {
+				has_variable = futa_dark_sister_coven_leader_follower_1
+			}
+		}
+		set_variable = {
+			name = futa_dark_sister_coven_leader_follower_1
+			value = $TARGET$
+		}
+	}
+	else_if = {
+		limit = { 
+			NOT = {
+				has_variable = futa_dark_sister_coven_leader_follower_2
+			}
+		}
+		set_variable = {
+			name = futa_dark_sister_coven_leader_follower_2
+			value = $TARGET$
+		}
+	}
+	else_if = {
+		limit = { 
+			NOT = {
+				has_variable = futa_dark_sister_coven_leader_follower_3
+			}
+		}
+		set_variable = {
+			name = futa_dark_sister_coven_leader_follower_3
+			value = $TARGET$
+		}
+	}
+	$TARGET$ ?= {
+		add_trait = dark_sister
+		set_variable = futa_dark_sister_coven_follower
+		set_variable = {
+			name = futa_dark_sister_coven_leader
+			value = scope:futa_dark_coven_inductor
+		}
+	}
+	change_variable = {
+		name = futa_dark_sister_coven_leader_amount_of_followers
+		add = 1
+	}
+}

@@ -1,0 +1,934 @@
+﻿# standard costs
+@maa_buy_cost = 110
+@maa_low_maintenance_cost = 0.8
+@maa_high_maintenance_cost = 3.8
+@cultural_maa_extra_ai_score = 60
+@cultural_maa_extra_extra_ai_score = 80
+
+
+# Must be synced between files with the values located at "# Provisions Costs #".
+@provisions_cost_infantry_cheap = 3
+@provisions_cost_infantry_moderate = 7
+@provisions_cost_infantry_expensive = 12
+@provisions_cost_infantry_bankrupting = 15
+
+@provisions_cost_cavalry_cheap = 7
+@provisions_cost_cavalry_moderate = 15
+@provisions_cost_cavalry_expensive = 21
+@provisions_cost_cavalry_bankrupting = 30
+
+@provisions_cost_special_cheap = 6
+@provisions_cost_special_moderate = 12
+@provisions_cost_special_expensive = 18
+@provisions_cost_special_bankrupting = 24
+
+futa_cult_bait = {
+	type = skirmishers
+	
+	damage = 16
+	toughness = 10
+	pursuit = 4
+	screen = 0
+	
+	terrain_bonus = {
+		forest = { damage = 12 toughness = 4 pursuit = 16 }
+		taiga = { damage = 12 toughness = 4 pursuit = 16 }
+		jungle = { damage = 12 toughness = 4 pursuit = 16 }
+	}
+
+	counters = {
+	}
+	
+	can_recruit = {
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+			domicile ?= {
+				has_domicile_parameter = futa_camp_unlocks_cult_baits
+			}
+		}
+		trigger_else = {
+			OR = {
+				has_character_flag = enclave_flag
+				has_character_flag = has_contact_with_enclave_flag
+			}
+			global_var:enclave_tier < 4
+		}		
+	}
+	
+	winter_bonus = {
+	}
+	
+	siege_tier = 1
+	siege_value = 0.1
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 25
+	allowed_in_hired_troops = no
+	ai_quality = { value = culture_ai_weight_skirmishers }
+	icon = cult_bait
+}
+
+futa_cult_saboteurs = {
+	type = skirmishers
+	
+	damage = 22
+	toughness = 16
+	pursuit = 8
+	screen = 0
+	
+	terrain_bonus = {
+		forest = { damage = 16 toughness = 14 pursuit = 32 }
+		taiga = { damage = 16 toughness = 14 pursuit = 32 }
+		jungle = { damage = 16 toughness = 14 pursuit = 32 }
+	}
+
+	counters = {
+	}
+	
+	can_recruit = {
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+			domicile ?= {
+				has_domicile_parameter = futa_camp_unlocks_cult_saboteurs
+			}
+		}
+		trigger_else = {
+			OR = {
+				has_character_flag = enclave_flag
+				has_character_flag = has_contact_with_enclave_flag
+			}
+			global_var:enclave_tier >= 4
+		}
+	}
+	
+	winter_bonus = {
+	}
+	
+	siege_tier = 2
+	siege_value = 0.5
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 30
+	allowed_in_hired_troops = no
+	ai_quality = { value = culture_ai_weight_skirmishers }
+	icon = cult_saboteurs
+}
+
+futa_assassins = {
+	type = skirmishers
+	
+	damage = 80
+	toughness = 8
+	pursuit = 17
+	screen = 0
+	
+	can_recruit = {
+		trigger_if = {
+			limit = { 
+				is_landless_adventurer = yes
+			}
+			domicile ?= {
+				has_domicile_parameter = futa_camp_unlocks_futa_assassins
+			}
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+	
+	# Finisher: Rebalanced the assassins to make them more lucrative to use. Maybe went a bit overboard? Yes, very overboard!
+	terrain_bonus = {		
+		forest = { damage = 20 toughness = 18 pursuit = 33 screen = 20 }
+		taiga = { damage = 20 toughness = 18 pursuit = 33 screen = 20 }
+		jungle = { damage = 20 toughness = 18 pursuit = 33 screen = 20 }
+		wetlands = { damage = 20 toughness = 18 pursuit = 33 screen = 20 }
+		mountains = { damage = 20 toughness = 12 screen = 24 }
+		desert_mountains = { damage = 20 toughness = 12 screen = 24 }
+		plains = { damage = -10 toughness = -8 }
+		steppe = { damage = -10 toughness = -8 }
+	}
+
+	counters = {
+		heavy_infantry = 1.5
+		pikemen = 2
+		archers = 3
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = 4 pursuit = 5 }
+	}
+
+	buy_cost = { gold =  futa_assassins_recruitment_cost }
+	low_maintenance_cost = { gold = futa_assassins_low_maint_cost }
+	high_maintenance_cost = { gold = futa_assassins_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	stack = 40
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 20] }
+	icon = futa_assassins
+}
+
+# ---------------------------------------------------------------------------- #
+#                            Brigand / Bandit Troops                           #
+# ---------------------------------------------------------------------------- #
+# Lower Size than default (Half) to invoke the feeling of "small roaming bandit bands" and not just a full on army.
+# Their stats will look higher than usual, but always remember to divide by how much smaller they are than default.
+# i.e: If a regiment is size 50, divide their stats by 2 to compare them to default units. Size 25, divide by 4 etc.
+# These units should also gain bonuses and fight better at "ambush" locations, such as wetlands and wooded terrain, but should not do well in open terrain.
+
+# Futa Renegades
+futa_brigand_renegades = {
+	type = skirmishers
+	
+	damage = 26
+	toughness = 30
+	pursuit = 20
+	screen = 30
+	
+	can_recruit = {
+		domicile ?= {
+			has_domicile_parameter = futa_camp_unlocks_futa_brigand_renegades
+		}
+	}
+	
+	terrain_bonus = {		
+		forest = { damage = 12 toughness = 10 pursuit = 15 screen = 10 }
+		taiga = { damage = 12 toughness = 10 pursuit = 15 screen = 10 }
+		jungle = { damage = 8 toughness = 8 pursuit = 10 screen = 5 }
+		wetlands = { damage = 5 screen = -10 }
+		mountains = { damage = 8 toughness = 4 screen = 6 }
+	}
+
+	counters = {
+		heavy_infantry = 1.5
+		pikemen = 1.5
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold =  futa_brigand_renegades_recruitment_cost }
+	low_maintenance_cost = { gold = futa_brigand_renegades_low_maint_cost }
+	high_maintenance_cost = { gold = futa_brigand_renegades_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	stack = 50
+	allowed_in_hired_troops = yes
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 20] }
+	icon = futa_brigand_renegades
+}
+
+# Futa Trappers
+futa_brigand_trappers = {
+	type = pikemen
+	
+	damage = 30
+	toughness = 43
+	pursuit = 0
+	screen = 16
+	
+	can_recruit = {
+		domicile ?= {
+			has_domicile_parameter = futa_camp_unlocks_futa_brigand_trappers
+		}
+	}
+	
+	terrain_bonus = {		
+		forest = { damage = 22 toughness = 28  pursuit = 10 screen = 26 }
+		taiga = { damage = 22 toughness = 28  pursuit = 10 screen = 26 }
+		jungle = { damage = 22 toughness = 28  pursuit = 10 screen = 26 }
+		wetlands = { damage = 22 toughness = 28  pursuit = 10 screen = 26 }
+		mountains = { damage = 8 toughness = 4 screen = 6 }
+		desert_mountains = { damage = 8 toughness = 4 screen = 6 }
+		plains = { damage = -20 toughness = -20 screen = -10 }
+		steppe = { damage = -20 toughness = -20 screen = -10 }
+	}
+
+	counters = {
+		light_cavalry = 2
+		heavy_cavalry = 2
+		elephant_cavalry = 2
+		camel_cavalry = 2
+		archers = 1
+		archer_cavalry = 1.5
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold =  futa_brigand_trappers_recruitment_cost }
+	low_maintenance_cost = { gold = futa_brigand_trappers_low_maint_cost }
+	high_maintenance_cost = { gold = futa_brigand_trappers_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	stack = 50
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 20] }
+	icon = futa_brigand_trappers
+}
+
+# Futa Ambushers
+futa_brigand_ambushers = {
+	type = archers
+	
+	damage = 45
+	toughness = 29
+	pursuit = 0
+	screen = 10
+	
+	can_recruit = {
+		domicile ?= {
+			has_domicile_parameter = futa_camp_unlocks_futa_brigand_ambushers
+		}
+	}
+	
+	terrain_bonus = {		
+		forest = { damage = 24 toughness = 33  pursuit = 10 screen = 26 }
+	}
+
+	counters = {
+		skirmishers = 2
+		heavy_infantry = 2
+		heavy_cavalry = 2
+		fcivilian = 2
+	}
+
+	winter_bonus = {
+	}
+
+	buy_cost = { gold =  futa_brigand_ambushers_recruitment_cost }
+	low_maintenance_cost = { gold = futa_brigand_ambushers_low_maint_cost }
+	high_maintenance_cost = { gold = futa_brigand_ambushers_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+	
+	stack = 75
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 20] }
+	icon = futa_brigand_ambushers
+}
+
+
+
+# High stats but very expensive and half regiment size (50) per stack, Numbers can be changed. Didn't really use them yet.
+# Keep in mind they are a mid / late game regiment, as the "intended" way of getting them will take a minimum of 100 years.
+# They require at least 5 successful invasions, as that is how you unlock their culture tradition.
+# Not to mention the time required to unlock invasions in the first place, as they unlock at enclave tier 4. (and you need to stay at level 4)
+# So I feel like their stats are justified.
+# Stats are nearly comparable to elephant or heavy cav.
+futa_realm_guard = {
+	type = heavy_infantry
+	
+	damage = 105
+	toughness = 120
+	pursuit = 5
+	screen = 60
+	
+	can_recruit = {
+		culture = { has_cultural_parameter = futa_unlock_realm_guard }
+	}
+	
+	terrain_bonus = {
+		hills = { damage = 5 toughness = 10 screen = 20 }
+		mountains = { damage = 25 toughness = 30 screen = 40 }
+		desert_mountains = { damage = 25 toughness = 30 screen = 40 }
+	}
+	
+	counters = {
+		pikemen = 2
+		heavy_cavalry = 1.5
+		light_cavalry = 1.5
+		archers = 2
+	}
+
+	buy_cost = { gold = futa_realm_guard_recruitment_cost }
+	low_maintenance_cost = { gold = futa_realm_guard_low_maint_cost }
+	high_maintenance_cost = { gold = futa_realm_guard_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	stack = 50
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 80] }
+	icon = futa_guard
+}
+
+femboi_sappers = {
+	type = skirmishers
+	
+	damage = 1
+	toughness = 1
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+	
+	can_recruit = {
+		dynasty ?= {
+            has_dynasty_modifier = sanctioned_fembois
+        }
+	}
+	
+	winter_bonus = {
+	}
+	
+	siege_tier = 2
+	siege_value = 1
+
+	fights_in_main_phase = no
+
+	buy_cost = { gold = tawashi_recruitment_cost }
+	low_maintenance_cost = { gold = tawashi_low_maint_cost }
+	high_maintenance_cost = { gold = tawashi_high_maint_cost }
+	provision_cost = @provisions_cost_special_moderate
+
+	stack = 30
+	allowed_in_hired_troops = no
+	ai_quality = { value = culture_ai_weight_skirmishers }
+	icon = femboi_sappers
+}
+
+futa_lust_starved_berserkers = {
+	type = skirmishers
+	
+	damage = 70
+	toughness = 50
+	pursuit = 110
+	screen = 12
+	
+	can_recruit = {
+		dynasty ?= {
+            has_dynasty_perk = futa_lustful_cursed_legacy_4
+        }
+	}
+	
+	terrain_bonus = {
+		plains = { pursuit = 30 screen = 5 }
+		steppe = { pursuit = 30 screen = 5 }
+		drylands = { pursuit = 30 screen = 5 }
+		wetlands = { damage = -15 toughness = -34 pursuit = -70 }
+		desert = { toughness = -5 pursuit = -70 }
+		desert_mountains = { toughness = -5 pursuit = -80 }
+		floodplains = { toughness = -5 pursuit = -60 }
+	}
+	
+	counters = {
+		skirmishers = 3
+	}
+
+	buy_cost = { gold = futa_realm_guard_recruitment_cost }
+	low_maintenance_cost = { gold = futa_realm_guard_low_maint_cost }
+	high_maintenance_cost = { gold = futa_realm_guard_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_expensive
+	
+	stack = 55
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 800] }
+	icon = futa_lust_starved_berserkers
+}
+
+futa_battle_nuns = {
+	type = heavy_infantry
+	
+	damage = 32
+	toughness = 29
+	pursuit = 0
+	screen = 20
+	
+	terrain_bonus = {
+		farmlands = { toughness = 15 }
+	}
+
+	counters = {
+		fdemon = 1
+	}
+	
+	can_recruit = {
+		has_trait = futa_confessor
+		has_trait_xp = {
+		    trait = futa_confessor
+			value >= 60
+		}
+	}
+	
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = 60 }
+	low_maintenance_cost = { gold = 0.2 }
+	high_maintenance_cost = { gold = 1.5 }
+	provision_cost = 9
+
+	stack = 100
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 480] }
+	icon = futa_battle_nuns
+}
+
+futa_hermillia_matrons = {
+	type = heavy_infantry
+	
+	damage = 40
+	toughness = 60
+	pursuit = 0
+	screen = 14
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	    fdemon = 1
+		heavy_infantry = 1
+	}
+	
+	can_recruit = {
+		faith = faith:futa_hermillian
+	}
+	
+	winter_bonus = {
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { piety = skirmisher_low_maint_cost }
+	high_maintenance_cost = { piety = skirmisher_high_maint_cost }
+	provision_cost = 10
+
+	stack = 100
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 800] }
+	icon = futa_hermillia_matrons
+}
+
+futa_hermillias_imbued_matrons = {
+	type = heavy_infantry
+	
+	damage = 125
+	toughness = 130
+	pursuit = 16
+	screen = 30
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	    fdemon = 2
+		heavy_infantry = 2
+		skirmishers = 2
+		pikemen = 1
+		light_cavalry = 1
+	}
+	
+	can_recruit = {
+		always = no
+	}
+	
+	winter_bonus = {
+	}
+
+	buy_cost = { piety = skirmisher_recruitment_cost }
+	low_maintenance_cost = { piety = skirmisher_low_maint_cost }
+	high_maintenance_cost = { piety = skirmisher_high_maint_cost }
+	provision_cost = 15
+
+	stack = 40
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 910] }
+	icon = futa_hermillias_imbued_matrons
+}
+
+futa_forlorn_mercenaries = {
+	type = heavy_infantry
+	
+	damage = 46
+	toughness = 32
+	pursuit = 10
+	screen = 6
+	
+	terrain_bonus = {
+		farmlands = { damage = 10 toughness = 5 }
+		plains = { damage = 10 pursuit = 10 }
+		drylands = { damage = 5 pursuit = 8 }
+		desert_mountains = { toughness = 10 }
+	}
+
+	counters = {
+	    fcivilian = 1
+		light_cavalry = 0.5
+		skirmishers = 1
+	}
+	
+	can_recruit = {
+		OR = {
+			has_realm_law = camp_purpose_mercenaries
+			dynasty ?= {
+				has_dynasty_perk = futa_lustful_cursed_legacy_2
+			}
+		}
+	}
+	
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = 110 }
+	low_maintenance_cost = { gold = 0.5 }
+	high_maintenance_cost = { gold = 3.6 }
+	provision_cost = 7
+
+	stack = 95
+	allowed_in_hired_troops = yes
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 30] }
+	icon = futa_forlorn_mercenaries
+}
+
+futa_vagrant_drengs = {
+	type = skirmishers
+	
+	damage = 23
+	toughness = 28
+	pursuit = 13
+	screen = 0
+	
+	terrain_bonus = {
+		forest = { damage = 15 toughness = 10 pursuit = 10 }
+		taiga = { damage = 8 toughness = 5 screen = 5 }
+		hills = { damage = 6 toughness = 15 screen = 10 }
+		mountains = { toughness = 10 }
+	}
+
+	counters = {
+	    archers = 1
+	}
+	
+	can_recruit = {
+		dynasty ?= {
+			has_dynasty_perk = futa_lustful_cursed_legacy_1
+		}
+	}
+	
+	winter_bonus = {
+	    normal_winter = { damage = 4 pursuit = 5 }
+		harsh_winter = { damage = 4 pursuit = 5 }
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = 0.7 }
+	high_maintenance_cost = { gold = 2.5 }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 150
+	allowed_in_hired_troops = no
+	ai_quality = { value = culture_ai_weight_skirmishers }
+	icon = futa_vagrant_drengs
+}
+
+futa_vagrant_drengs_preggo = {
+	type = fcivilian
+	
+	damage = 10
+	toughness = 8
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+	}
+
+	counters = {
+	}
+	
+	can_recruit = {
+		always = no
+	}
+	
+	winter_bonus = {
+	    normal_winter = { toughness = 6 }
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = 16
+
+	stack = 50
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 300] }
+	icon = futa_vagrant_drengs_preggo
+}
+
+
+futa_burial_wardens = {
+	type = pikemen
+	
+	damage = 50
+	toughness = 50
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+	    forest = { damage = 15 toughness = 20 }
+		hills = { damage = 8 toughness = 10 screen = 10 }
+		wetlands = { toughness = 2 }
+	}
+
+	counters = {
+	    skirmishers = 2
+	}
+	
+	can_recruit = {
+		dynasty ?= {
+			has_dynasty_perk = futa_lustful_cursed_legacy_2
+		}
+	}
+	
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = pikemen_recruitment_cost }
+	low_maintenance_cost = { piety = pikemen_low_maint_cost }
+	high_maintenance_cost = { piety = pikemen_high_maint_cost }
+	provision_cost = 6
+
+	stack = 100
+	allowed_in_hired_troops = no
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 1] }
+	icon = futa_burial_wardens
+}
+
+##############################
+##### Artifact Only MAAs #####
+##############################
+
+# Heavy Cav. Damage focused unit. Stats are comparable to Cataphracts. Lower defense and screen in exchange for higher damage and pursuit. More expensive
+futa_heavy_lancers = {
+	type = heavy_cavalry
+	
+	damage = 150
+	toughness = 20
+	pursuit = 50
+	screen = 0
+	
+	can_recruit = {
+		any_equipped_character_artifact = {
+			has_variable = futa_lance_of_the_impaler_artifact_variable
+		}
+	}
+	
+	terrain_bonus = {
+		plains = { damage = 50 pursuit = 25 }
+		drylands = { damage = 50 pursuit = 25 }
+		steppe = { damage = 50 pursuit = 25 }
+		hills = { damage = -20 pursuit = -10 }
+		mountains = { damage = -50 pursuit = -25 }
+		desert_mountains = { damage = -50 pursuit = -25 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -50 }
+	}
+	
+	counters = {
+		heavy_cavalry = 1
+		light_cavalry = 1
+		heavy_infantry = 1.5
+	}
+
+	buy_cost = { gold = futa_heavy_lancer_recruitment_cost }
+	low_maintenance_cost = { gold = futa_heavy_lancer_low_maint_cost }
+	high_maintenance_cost = { gold = futa_heavy_lancer_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_bankrupting
+	
+	stack = 50
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 80] }
+	icon = futa_heavy_lancers
+}
+
+# Light Cav. Damage focused unit. Stats are comparable to Konni. Lower defense and screen in exchange for higher damage and pursuit. More expensive
+futa_light_lancers = {
+	type = light_cavalry
+	
+	damage = 40
+	toughness = 10
+	pursuit = 90
+	screen = 0
+	
+	can_recruit = {
+		any_equipped_character_artifact = {
+			has_variable = futa_lance_of_the_impaler_artifact_variable
+		}
+	}
+	
+	terrain_bonus = {
+		plains = { damage = 20 pursuit = 10 }
+		drylands = { damage = 20 pursuit = 10 }
+		steppe = { damage = 20 pursuit = 10 }
+		hills = { damage = -20 pursuit = -10 }
+		mountains = { damage = -25 pursuit = -45 }
+		desert_mountains = { damage = -25 pursuit = -45 }
+		wetlands = { damage = -35 toughness = -10 pursuit = -90 }
+	}
+	
+	counters = {
+		heavy_cavalry = 1
+		light_cavalry = 1
+		archers = 1.5
+	}
+
+	buy_cost = { gold = futa_light_lancer_recruitment_cost }
+	low_maintenance_cost = { gold = futa_light_lancer_low_maint_cost }
+	high_maintenance_cost = { gold = futa_light_lancer_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_bankrupting
+	
+	stack = 100
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 80] }
+	icon = futa_light_lancers
+}
+
+futa_steppe_huntress = {
+	type = archer_cavalry
+	
+	damage = 52
+	toughness = 30
+	pursuit = 40
+	screen = 30
+	
+	terrain_bonus = {
+		steppe = { damage = 45 }
+		plains = { damage = 20 }
+		drylands = { damage = 20 }
+		jungle = { damage = -20 pursuit = -20 }
+		wetlands = { damage = -30 pursuit = -30 }
+		mountains = { damage = -30 pursuit = -30 }
+		desert_mountains = { damage = -30 pursuit = -30 }
+	}
+
+	counters = {
+		skirmishers = 1
+		heavy_infantry = 1
+	}
+
+	can_recruit = {
+		OR = {
+			this ?= character:futa_warlord
+			valid_for_maa_trigger = { PARAMETER = futa_unlock_maa_futa_steppe_huntress }
+			AND = {
+				valid_for_maa_trigger = { PARAMETER = unlock_maa_horse_archers }
+				OR = {
+					primary_spouse ?= {
+						has_trait = futa_genetic
+					}
+					has_trait = futa_genetic
+				}
+			}
+		}
+	}
+
+	buy_cost = { gold = horse_archers_recruitment_cost }
+	low_maintenance_cost = { gold = horse_archers_low_maint_cost }
+	high_maintenance_cost = { gold = horse_archers_high_maint_cost }
+	provision_cost = @provisions_cost_cavalry_cheap
+	
+	stack = 100
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 120] }
+	icon = futa_steppe_huntress
+}
+
+futa_empyrean_legion = {
+	type = archer_cavalry
+	
+	damage = 75
+	toughness = 50
+	pursuit = 70
+	screen = 50
+	siege_value = 0.2
+	
+	terrain_bonus = {
+		steppe = { damage = 75 }
+		plains = { damage = 25 }
+		drylands = { damage = 25 }
+		jungle = { damage = -20 pursuit = -20 }
+		wetlands = { damage = -30 pursuit = -30 }
+		mountains = { damage = -30 pursuit = -30 }
+		desert_mountains = { damage = -30 pursuit = -30 }
+	}
+
+	counters = {
+		skirmishers = 2
+		heavy_infantry = 2
+		archer_cavalry = 2
+		light_cavalry = 1.5
+		heavy_cavalry = 2
+	}
+
+	can_recruit = {
+		trigger_if = {
+			limit = { 
+				dynasty ?= {
+					NOT = {
+						has_variable = futa_warlord_empyrean_legion_unlocked_for_dynasty
+					}
+				}
+			}
+			always = no
+			# this = character:futa_warlord
+		}
+		trigger_else = {
+			house ?= {
+				root ?= house_head
+			}
+		}
+	}
+
+	max_regiments = 1
+
+	buy_cost = { gold = 200 prestige = 100 }
+	low_maintenance_cost = { gold = 1 }
+	high_maintenance_cost = { gold = 5 }
+	provision_cost = @provisions_cost_cavalry_cheap
+	
+	stack = 100
+	ai_quality = { value = @[cultural_maa_extra_ai_score + 980] }
+	icon = futa_empyrean_legion
+}
+
+futa_spite_imp = {
+	type = fdemon
+	
+	damage = 26
+	toughness = 40
+	pursuit = 60
+	screen = 0
+	
+	terrain_bonus = {
+		mountains = {  toughness = 15 pursuit = 30 }
+		desert_mountains = {  toughness = 15 pursuit = 30 }
+	}
+
+	counters = {
+	}
+	
+	can_recruit = {
+		always = no
+	}
+	
+	winter_bonus = {
+	}
+
+	buy_cost = { gold = skirmisher_recruitment_cost }
+	low_maintenance_cost = { gold = skirmisher_low_maint_cost }
+	high_maintenance_cost = { gold = skirmisher_high_maint_cost }
+	provision_cost = @provisions_cost_infantry_cheap
+
+	stack = 1
+	allowed_in_hired_troops = no
+	ai_quality = { value = culture_ai_weight_skirmishers }
+	icon = futa_spite_imp
+}
